@@ -55,6 +55,9 @@ class Database extends SingletonContainer
                 case TipoDato::NUMERICO:
                     $this->validarNumerico($datos[$clave]);
                     break;
+                case TipoDato::SHA1:
+                    $this->validarSha1($datos[$clave]);
+                    break;
             }
         }
     }
@@ -74,7 +77,7 @@ class Database extends SingletonContainer
         $tiposDatos = array();
         foreach ($datos as $clave => $valor)
             $tiposDatos[$clave] = TipoDato::getTipoDato($datos[$clave]);
-            
+
         return $tiposDatos;
     }
 
@@ -119,5 +122,11 @@ class Database extends SingletonContainer
         $dato = str_replace("%", "\%", $dato);
         $dato = str_replace("_", "\_", $dato);
         return $dato;
+    }
+
+    private function validarSha1($str)
+    {
+        if (!preg_match('/^[0-9a-f]{40}$/i', $str))
+            die($str . " no es un hash valido");
     }
 }
