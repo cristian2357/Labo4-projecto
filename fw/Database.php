@@ -43,6 +43,9 @@ class Database extends SingletonContainer
 
     public function validar($datos, $tiposDatos)
     {
+        if (!$this->cn)                         // para que algunas dependencias no fallen en los test
+            $this->connect();
+
         $this->validarInformacionParametros($datos, $tiposDatos);
         foreach ($datos as $clave => $valor) {
             switch ($tiposDatos[$clave]) {
@@ -57,6 +60,9 @@ class Database extends SingletonContainer
                     break;
                 case TipoDato::SHA1:
                     $this->validarSha1($datos[$clave]);
+                    break;
+                case TipoDato::FECHA:
+                    $this->validarFecha($datos[$clave]);
                     break;
             }
         }
@@ -128,5 +134,14 @@ class Database extends SingletonContainer
     {
         if (!preg_match('/^[0-9a-f]{40}$/i', $str))
             die($str . " no es un hash valido");
+    }
+
+    private function validarFecha($strFecha)
+    {
+        if (!preg_match('/' . '\d{2}(\/)\d{2}(\/)\d{4}' . '/', $strFecha))
+            die($strFecha . " tiene un formato de fecha valido");
+        list($dia, $mes, $anio) = explode('/', $strFecha);
+        if (!checkdate($mes, $dia, $anio))
+            die($strFecha . " no es una fecha valida");
     }
 }

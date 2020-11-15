@@ -4,7 +4,8 @@ class TipoDato
     const ALFANUMERICO = 0;
     const ENTERO_POSITIVO = 1;
     const NUMERICO = 2;
-    const SHA1= 3;
+    const SHA1 = 3;
+    const FECHA = 4;
 
     public static function getTipoDato($dato)
     {
