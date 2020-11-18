@@ -1,10 +1,14 @@
 <?php
 
-require './models/EmpresaModel.php';
-require './fw/Model.php';
-
 class SucursalesModel extends Model
 {
+    public function getSucursales($eid) {
+        $this->db->query("SELECT s.idsucursal, s.direccion
+                            FROM sucursales s LEFT JOIN empresas e ON e.empresa_id=s.empresa_id
+                            WHERE s.empresa_id = $eid");
+        return $this->db->fetchAll();
+    }
+
     public function existeSucursal($idEmpresa, $idSucursal)
     {
         $this->db->validar(
@@ -12,16 +16,17 @@ class SucursalesModel extends Model
             array('idSucursal' => TipoDato::ENTERO_POSITIVO, 'idEmpresa' => TipoDato::ENTERO_POSITIVO)
         );
         $this->db->query("select * from sucursales where idempresas = $idEmpresa and idsucursales = $idSucursal");
-        return $this->db->numRows == 1;
+        return $this->db->numRows() == 1;
     }
 
     public function getSucursalesByEmpresa($idEmpresa)
     {
-        if (!(new EmpresaModel())->existeEmpresa($idEmpresa))
+        $aux = new EmpresaModel();
+        if (!$aux->existeEmpresa($idEmpresa))
             die("No existe la empresa solicitada al buscar sucursales");
 
         $this->db->query("select * from sucursales where idempresas = $idEmpresa");
-        if ($this->db->numRows != 1)
+        if ($this->db->numRows() != 1)
             die("No se encontraron sucursales para la empresa $idEmpresa");
 
         return $this->db->fetchAll();

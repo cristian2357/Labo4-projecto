@@ -1,8 +1,12 @@
 <?php
-require "../fw/Model.php";
 
 class EmpresaModel extends Model
 {
+    public function getTodos() {
+        $this->db->query("SELECT * FROM empresas");
+        return $this->db->fetchAll();
+    }
+    
     public function existeEmpresa($idEmpresa)
     {
         $this->db->validar(array('idEmpresa' => $idEmpresa), array('idEmpresa' => TipoDato::ENTERO_POSITIVO));

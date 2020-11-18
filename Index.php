@@ -1,6 +1,3 @@
 <?php
 
-
-require 'tests/TestValidaciones.php';
-
-TestValidaciones::testValidacionSha1();
+require 'controllers/conseguirturno.php';
