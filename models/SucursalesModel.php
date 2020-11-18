@@ -17,7 +17,7 @@ class SucursalesModel extends Model
 
     public function getSucursalesByEmpresa($idEmpresa)
     {
-        if (!new EmpresaModel() . existeEmpresa($idEmpresa))
+        if (!(new EmpresaModel())->existeEmpresa($idEmpresa))
             die("No existe la empresa solicitada al buscar sucursales");
 
         $this->db->query("select * from sucursales where idempresas = $idEmpresa");
@@ -37,14 +37,14 @@ class SucursalesModel extends Model
             die("No se han encontrado los dias de atencion para la sucursal $idSucursal de la empresa $idEmpresa");
 
         $diasAtendidosDb = $this->db->fetchAll();
-        $nombreDias = array('lunes', 'martes', 'miercoles', 'jueves', 'sabado', 'domingo');
+        $nombreDias = array('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo');
 
         $diasAtendidos = array();
         foreach ($nombreDias as $dia)
-            if ($diasAtendidosDb['atiende_' . $dia] == 'S')             // revisa cada columna correspondiente e ingresa al vector los nombre de los dias en los que se atiende
-                $diasAtendidos[] = $diasAtendidosDb['atiende_' . $dia];
+            if ($diasAtendidosDb['atiende_' . $dia] == 'S')
+                $diasAtendidos[] = array_seach($nombreDias[$dia]) + 1;  // ingreso el nro de dia de la semana
 
-        return $diasAtendidos;              // podria enviarse el nro del dia de la semana, habria que ver que utilidades hay en la doc. de php para obtener el nombre del dia de una fecha        
+        return $diasAtendidos;
     }
 
     public function getSucursalById($idEmpresa, $idSucursal)
