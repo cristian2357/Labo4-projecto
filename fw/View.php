@@ -4,6 +4,6 @@ abstract class View
 {
     public function render()
     {
-        return "../html/" . get_class($this) . ".php";
+        include "../html/" . get_class($this) . ".php";
     }
 }
