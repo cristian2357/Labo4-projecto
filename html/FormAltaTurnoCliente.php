@@ -33,25 +33,25 @@
 			</ul>
 		</nav>
 		<form action="" method="post">
-
+			
 			<?php if(count($_POST)>0) { ?>
 
-			<label for="sucursal">Sucursal mas cercana:</label>
+			<input type="hidden" name="idEmpresa" value =<?=$this->empresa['idempresas']?>>
+			<label for="sucursal">Sucursal:</label>
 			<select name="sucursal" id="sucursal">
+				<option selected disabled>Seleccione una sucursal</option>
 				<?php foreach($this->sucursales as $s) { ?>
 					<option value="<?= $s['idsucursales']?>"><?= $s['direccion']?></option>
 				<?php } ?>
 			</select><br/><br/>
 
 			<label for="fecha">Seleccione fecha disponible:</label>
-			<select name="fecha" id="fecha">
-			<?php foreach($this->fechasPosibles as $f) { ?>
-				<option value="<?=$f?>"><?=$f?></option>
-			<?php } ?>
+			<select name="fecha" id="fecha">			
 			</select><br/><br/>
 			
 			<label for="horario">Horario de turno:</label>
 			<select name="horario" id="horario">
+				<option selected disabled>Seleccione un horario</option>
 				<option value="1">08:00</option>
 				<option value="2">10:00</option>
 				<option value="3">12:00</option>
@@ -74,4 +74,6 @@
 
 		</form>
 	</body>
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/AltaTurno.js"></script>
 </html>
