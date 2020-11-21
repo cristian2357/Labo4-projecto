@@ -2,6 +2,6 @@
 
 //fw/fw.php
 
-require 'fw/Database.php';
-require 'fw/Model.php';
-require 'fw/View.php';
+require Configuration::getAbsolutePath().'/fw/Database.php';
+require Configuration::getAbsolutePath().'/fw/Model.php';
+require Configuration::getAbsolutePath().'/fw/View.php';

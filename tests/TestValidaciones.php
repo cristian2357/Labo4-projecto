@@ -1,6 +1,6 @@
 <?php
 
-require './fw/Database.php';
+require Configuration::getAbsolutePath().'/fw/Database.php';
 
 class TestValidaciones
 {

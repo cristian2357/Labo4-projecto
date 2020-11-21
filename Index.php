@@ -1,3 +1,4 @@
 <?php
 
-require 'controllers/conseguirturno.php';
+require './cfg/Configuration.php';
+require Configuration::getAbsolutePath() . '/controllers/AltaTurnoController.php';

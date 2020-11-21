@@ -2,13 +2,6 @@
 
 class SucursalesModel extends Model
 {
-    public function getSucursales($eid) {
-        $this->db->query("SELECT s.idsucursal, s.direccion
-                            FROM sucursales s LEFT JOIN empresas e ON e.empresa_id=s.empresa_id
-                            WHERE s.empresa_id = $eid");
-        return $this->db->fetchAll();
-    }
-
     public function existeSucursal($idEmpresa, $idSucursal)
     {
         $this->db->validar(
@@ -47,7 +40,7 @@ class SucursalesModel extends Model
         $diasAtendidos = array();
         foreach ($nombreDias as $dia)
             if ($diasAtendidosDb['atiende_' . $dia] == 'S')
-                $diasAtendidos[] = array_seach($nombreDias[$dia]) + 1;  // ingreso el nro de dia de la semana
+                $diasAtendidos[] = array_search($nombreDias[$dia], $nombreDias) + 1;  // ingreso el nro de dia de la semana
 
         return $diasAtendidos;
     }

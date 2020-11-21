@@ -1,6 +1,6 @@
 <?php
 
-require './controllers/Utils/FechaHoraUtils.php';
+require Configuration::getAbsolutePath().'/controllers/Utils/FechaHoraUtils.php';
 
 class TestFechasUtils
 {

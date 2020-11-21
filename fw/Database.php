@@ -1,8 +1,7 @@
 <?php
 
-require 'cfg/Configuration.php';
-require 'fw/SingletonContainer.php';
-require 'fw/TipoDato.php';
+require Configuration::getAbsolutePath().'/fw/SingletonContainer.php';
+require Configuration::getAbsolutePath().'/fw/TipoDato.php';
 
 class Database extends SingletonContainer
 {
