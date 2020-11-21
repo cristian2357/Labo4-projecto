@@ -2,4 +2,4 @@
 
 RewriteEngine on
 
-RewriteRule ^turnos$ controllers/conseguirturno.php
+RewriteRule ^altaTurno$ controllers/AltaTurnoController.php
