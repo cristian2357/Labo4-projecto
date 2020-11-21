@@ -9,7 +9,8 @@ class Configuration
 
     public static function getAbsolutePath()
     {
-        return str_replace('\\', '/', getcwd()) . '/..';
+        return 'C:/xampp/htdocs/Labo4 projecto';
+
     }
 
     public static function getAbsolutePathSinDirectorioLocal()

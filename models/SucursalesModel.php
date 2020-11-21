@@ -30,17 +30,17 @@ class SucursalesModel extends Model
         if (!$this->existeSucursal($idEmpresa, $idSucursal))
             die("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
 
-        $this->db->query("select * from sucursales_dias_disponibles where idempresas = $idEmpresa and idsucursales = $idSucursal");
-        if ($this->db->numRows != 1)
+        $this->db->query("select * from sucursales_dias_disponibles where idempresa = $idEmpresa and idsucursal = $idSucursal");
+        if ($this->db->numRows() != 1)
             die("No se han encontrado los dias de atencion para la sucursal $idSucursal de la empresa $idEmpresa");
 
-        $diasAtendidosDb = $this->db->fetchAll();
+        $diasAtendidosDb = $this->db->fetch();
         $nombreDias = array('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo');
 
         $diasAtendidos = array();
         foreach ($nombreDias as $dia)
             if ($diasAtendidosDb['atiende_' . $dia] == 'S')
-                $diasAtendidos[] = array_search($nombreDias[$dia], $nombreDias) + 1;  // ingreso el nro de dia de la semana
+                $diasAtendidos[] = array_search($dia, $nombreDias) + 1;  // ingreso el nro de dia de la semana
 
         return $diasAtendidos;
     }
@@ -52,8 +52,8 @@ class SucursalesModel extends Model
 
         $this->db->query("select direccion, date_format(hora_apertura,'%H:%i') as hora_apertura, 
         date_format(hora_cierre,'%H:%i') as hora_cierre 
-        from sucursal where idempresas = $idEmpresa and idsucursales = $idSucursal");
-        if ($this->db->numRows != 1)
+        from sucursales where idempresas = $idEmpresa and idsucursales = $idSucursal");
+        if ($this->db->numRows() != 1)
             die("No se han encontrado los horarios para la sucursal $idSucursal de la empresa $idEmpresa");
 
         return $this->db->fetchAll();

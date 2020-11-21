@@ -28,6 +28,6 @@ class EmpresaModel extends Model
             die("No existe la empresa solicitada");
            
         $this->db->query("select * from empresas where idempresas = $idEmpresa");
-        return $this->db->fetchAll();
+        return $this->db->fetch();
     }    
 }
