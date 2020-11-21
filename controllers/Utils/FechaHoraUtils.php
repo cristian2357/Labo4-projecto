@@ -6,7 +6,10 @@ class FechaHoraUtils
 
     public static function getFechaFutura($diasFuturos)
     {
-        return date_format(date(strtotime("+$diasFuturos day")), 'd/m/y');
+        $timeStamp = strtotime("+$diasFuturos day");
+        $dateTime = new DateTime();
+        $dateTime->setTimestamp($timeStamp);
+        return date_format($dateTime, self::FORMAT_DEFAULT_FECHA);        
     }
 
     public static function getNumeroDiaSemanaByDateTime($dateTime)
@@ -53,5 +56,10 @@ class FechaHoraUtils
                 $fechasRetornadas[] = self::parseDateTimeToStringFecha($fechaTemp);
         }
         return $fechasRetornadas;
+    }
+
+    public static function getFechaHoy()
+    {
+        return self::parseDateTimeToStringFecha(new DateTime());
     }
 }

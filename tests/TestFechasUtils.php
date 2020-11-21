@@ -1,6 +1,6 @@
 <?php
 
-require Configuration::getAbsolutePath().'/controllers/Utils/FechaHoraUtils.php';
+require Configuration::getAbsolutePath() . '/controllers/Utils/FechaHoraUtils.php';
 
 class TestFechasUtils
 {
@@ -13,5 +13,16 @@ class TestFechasUtils
         $diasPermitidos = array('6', '7');
 
         var_dump(FechaHoraUtils::getListaFechasEnDiasPermitidos($diasPermitidos, $strFecha, $strFechaFin));
+    }
+
+    public static function testFechaFutura()
+    {
+        $diasFuturos = 15;
+        $a = strtotime("+$diasFuturos day");
+        $b = new DateTime();
+        $b->setTimestamp($a);
+
+        $c = date_format($b, 'd/m/y');
+        var_dump($c);
     }
 }
