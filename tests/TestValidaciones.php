@@ -78,4 +78,17 @@ class TestValidaciones
         $fecha = "02/09-2020";
         $db->validar(array('fecha' => $fecha), array('fecha' => TipoDato::FECHA));
     }
+
+    public static function testValidacionHora()
+    {
+        $db = Database::getInstance();
+
+        $hora = "09:00";
+
+        $db->validar(array('hora' => $hora), array('hora' => TipoDato::HORA));
+
+        $hora = "25:00";
+
+        $db->validar(array('hora' => $hora), array('hora' => TipoDato::HORA));
+    }
 }

@@ -6,6 +6,7 @@ class TipoDato
     const NUMERICO = 2;
     const SHA1 = 3;
     const FECHA = 4;
+    const HORA = 5;
 
     public static function getTipoDato($dato)
     {
