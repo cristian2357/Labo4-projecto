@@ -63,6 +63,9 @@ class Database extends SingletonContainer
                 case TipoDato::FECHA:
                     $this->validarFecha($datos[$clave]);
                     break;
+                case TipoDato::HORA:
+                    $this->validarHora($datos[$clave]);
+                    break;
             }
         }
     }
@@ -142,5 +145,11 @@ class Database extends SingletonContainer
         list($dia, $mes, $anio) = explode('/', $strFecha);
         if (!checkdate($mes, $dia, $anio))
             die($strFecha . " no es una fecha valida");
+    }
+
+    private function validarHora($strHora)
+    {
+        if (!preg_match('/' . '(2[0-3]|[01][0-9]):[0-5][0-9]' . '/', $strHora))
+            die("La hora ingresada es invalida");
     }
 }
