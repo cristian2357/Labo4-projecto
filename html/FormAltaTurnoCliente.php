@@ -3,23 +3,14 @@
 	<head>
 		<title>iTurnos</title>
 		<link rel="icon" type="img/png" href="img/ilogot.png">
+		<link href="css/turnoscss.css" rel="stylesheet" type="text/css" />
 	</head>
-	<style type="text/css">
-		h1{background:#87ad07;padding:10px;width:30%;margin-top:0px;margin-bottom:100px;float:left;}
-		ul{list-style-type:none;}
-		li{background:#87ad07;padding:20px;width:130px;float:right;display:block;}
-		li:hover{box-shadow: 0px 3px 2px #a8a8a8;}
-		ul ul{display: none;}
-		ul li:hover ul{display: block;}
-		a{text-decoration: none;}
-		form{clear: both;}
-	</style>
 
 	<body>
 		<h1>iTurnos</h1>
 		<nav>
 			<ul>
-				<li><a href="">Log In</a></li>
+				<li><a href="controllers/LogController.php">Log In</a></li>
 				<li><a href="">recomendar</a></li>
 				<li><a href="">contactenos</a></li>
 				<li><a href="">conozcanos</a>
