@@ -1,6 +1,6 @@
 <?php
 
-class TurnosModel
+class TurnosModel extends Model
 {
     public function insertarTurno($idEmpresa, $idSucursal, $hora, $fecha, $idCliente)
     {
@@ -22,4 +22,16 @@ class TurnosModel
     {
         // crear Datetime con fecha y hora, cota inferior, despues sumarle los minutos de la operacion y verificar que no haya nada entre las dos cotas
     }
+
+    public function getTurnoByEmpresaSucursal($idEmpresa,$idsucursal) {
+    	
+        $this->db->query("select * from turnos where idempresas = '$idEmpresa' AND idsucursales = '$idsucursal' ");
+        return $this->db->fetchAll();
+    }
+    public function getTurnoByEmpresa($idEmpresa) {
+        $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
+        date_format(fecha,'%d/%m/%y') as fecha from turnos where idempresas = '$idEmpresa' ");
+        return $this->db->fetchAll();
+    }
+
 }
