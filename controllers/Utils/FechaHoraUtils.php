@@ -22,7 +22,7 @@ class FechaHoraUtils
 
     public static function parseDateTimeToStringFecha($dateTime)
     {
-        return date_format($dateTime, 'd/m/y');
+        return date_format($dateTime, self::FORMAT_DEFAULT_FECHA);
     }
 
     public static function parseStringToDateTime($strFecha)

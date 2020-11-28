@@ -56,6 +56,6 @@ class SucursalesModel extends Model
         if ($this->db->numRows() != 1)
             die("No se han encontrado los horarios para la sucursal $idSucursal de la empresa $idEmpresa");
 
-        return $this->db->fetchAll();
+        return $this->db->fetch();
     }
 }
