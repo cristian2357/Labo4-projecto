@@ -4,12 +4,14 @@ require '../cfg/Configuration.php';
 require Configuration::getAbsolutePath() . '/fw/fw.php';
 require Configuration::getAbsolutePath() . '/models/EmpresaModel.php';
 require Configuration::getAbsolutePath() . '/models/SucursalesModel.php';
+require Configuration::getAbsolutePath() . '/models/TurnosModel.php';
 require Configuration::getAbsolutePath() . '/views/cliente/FormAltaTurnoCliente.php';
 require Configuration::getAbsolutePath() . '/controllers/Utils/FechaHoraUtils.php';
 
 $e = new EmpresaModel();
 $s = new SucursalesModel();
 $v = new FormAltaTurnoCliente();
+$t = new TurnosModel();
 
 
 if (count($_POST) == 0) {
@@ -38,4 +40,12 @@ if (isset($_POST['empresa']) && !isset($_POST['puntoEntrada'])) {
 	$diasAtendidos = $s->getDiasAtendidosBySucursal($idEmpresa, $idSucursal);
 	$fechasSucursalAbierta = FechaHoraUtils::getListaFechasEnDiasPermitidos($diasAtendidos, FechaHoraUtils::getFechaHoy(), FechaHoraUtils::getFechaFutura(15));
 	echo json_encode($fechasSucursalAbierta);
+} else if (isset($_POST['puntoEntrada']) && $_POST['puntoEntrada'] == 'J') {
+	// Horarios x AJAX
+	if (!isset($_POST['idEmpresa']) || !isset($_POST['idSucursal']) || !isset($_POST['fecha']))
+		die("Faltan valores en la peticion con punto de entrada J");
+	
+		$horariosDisponibles = $t->getHorariosDisponibles($_POST['idEmpresa'], $_POST['idSucursal'], $_POST['fecha']);
+
+	echo json_encode($horariosDisponibles);
 }

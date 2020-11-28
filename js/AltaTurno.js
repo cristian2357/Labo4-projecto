@@ -1,11 +1,12 @@
 $(document).ready(function () {
     $("select[name='sucursal']").change(getFechasAjax);
-
+    $("select[name='fecha']").change(getHorariosAjax);
 });
 
 function getFechasAjax() {
     var idSucursal = $("select[name='sucursal']").val();
     var idEmpresa = $("input[name='idEmpresa']").val();
+    $("select[name='fecha'] option").not('[disabled]').remove();
     $.ajax({
         type: "post",
         url: "controllers/AltaTurnoController.php",
@@ -18,17 +19,30 @@ function getFechasAjax() {
             if (response.includes('<')) // En errores llega codigo HTML
                 $('html').html(response);
             else
-                parseFechasDisponibles(JSON.parse(response));
+                parseOptionsInSelect('fecha', JSON.parse(response));
         }
     });
 }
 
-function parseFechasDisponibles(fechas) {
-    var selectFechas = $("select[name='fecha']");
-
-    var html = "";
-    for (var f of fechas)
-        html += '<option value=' + f + '>' + f + '</option>';
-
-    selectFechas.html(html);
+function getHorariosAjax() {
+    var idSucursal = $("select[name='sucursal']").val();
+    var idEmpresa = $("input[name='idEmpresa']").val();
+    var fecha = $("select[name='fecha']").val();
+    $("select[name='horario'] option").not('[disabled]').remove();
+    $.ajax({
+        type: "post",
+        url: "controllers/AltaTurnoController.php",
+        data: {
+            puntoEntrada: 'J',
+            idSucursal: idSucursal,
+            idEmpresa: idEmpresa,
+            fecha: fecha
+        },
+        success: function (response) {
+            if (response.includes('<')) // En errores llega codigo HTML
+                $('html').html(response);
+            else
+                parseOptionsInSelect(('horario'), JSON.parse(response));
+        }
+    });
 }

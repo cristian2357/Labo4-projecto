@@ -38,17 +38,12 @@
 
 			<label for="fecha">Seleccione fecha disponible:</label>
 			<select name="fecha" id="fecha">			
+				<option selected disabled>Seleccione una fecha</option>
 			</select><br/><br/>
 			
 			<label for="horario">Horario de turno:</label>
 			<select name="horario" id="horario">
-				<option selected disabled>Seleccione un horario</option>
-				<option value="1">08:00</option>
-				<option value="2">10:00</option>
-				<option value="3">12:00</option>
-				<option value="4">14:00</option>
-				<option value="5">16:00</option>
-				<option value="6">18:00</option>
+				<option selected disabled>Seleccione un horario</option>				
 			</select><br/><br/>
 
 			<input type="submit" value="Agendar Turno">
@@ -67,4 +62,5 @@
 	</body>
 	<script src="js/jquery-3.5.1.min.js"></script>
 	<script src="js/AltaTurno.js"></script>
+	<script src="js/Utils.js"></script>
 </html>
