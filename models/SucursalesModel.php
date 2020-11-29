@@ -58,4 +58,13 @@ class SucursalesModel extends Model
 
         return $this->db->fetch();
     }
+    public function getSucursal($idSucursal){
+        $this->db->query("SELECT * FROM sucursales WHERE idSucursales='$idSucursal' ");
+        return $this->db->fetch();
+    }
+
+    public function agregarSucursal($sucursal, $hora_apertura, $hora_cierre, $empresa){
+        $this->db->query("INSERT INTO sucursales (idempresas, direccion, hora_apertura, hora_cierre)
+                            VALUES ('$empresa', '$sucursal', str_to_date('$hora_apertura','%H:%i'), str_to_date('$hora_cierre','%H:%i')) ");
+    }
 }
