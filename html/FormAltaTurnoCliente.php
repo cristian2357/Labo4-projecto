@@ -46,7 +46,24 @@
 				<option selected disabled>Seleccione un horario</option>				
 			</select><br/><br/>
 
-			<input type="submit" value="Agendar Turno">
+			<label for="dni">DNI cliente:</label>					
+			<input type="number" name="dni" id="dni" maxlength="8">
+			
+			<div class="datos-cliente" style="display:none">
+				<label for="nombre-cliente">Nombre y apellido:</label>
+				<input type="text" name="nombre-cliente" id="nombre-cliente" minlength="5" maxlength="70">
+				<label for="telefono-cliente">Telefono de contacto:</label>
+				<input type="number" name="telefono-cliente" id="telefono-cliente" minlength="7" maxlength="15">
+				
+				<input type="hidden" name="id-cliente">;
+			</div>	
+			
+
+			<br>
+			<button class="btn-insertar-turno">Agendar Turno</button>
+
+
+			<div class="error-validacion"></div>
 
 			<?php } else { ?>
 				<label for="empresa"><br/><br/>Seleccione empresa:</label>

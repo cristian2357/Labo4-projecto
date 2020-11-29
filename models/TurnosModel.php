@@ -2,20 +2,20 @@
 
 class TurnosModel extends Model
 {
-    public function insertarTurno($idEmpresa, $idSucursal, $hora, $fecha, $idCliente)
+    public function insertarTurno($idEmpresa, $idSucursal, $hora, $fecha, $cliente)
     {
         $this->db->validar(
             array('fecha' => $fecha, 'hora' => $hora),
-            array('fecha' => TipoDato::FECHA, 'hora', TipoDato::HORA)
+            array('fecha' => TipoDato::FECHA, 'hora' => TipoDato::HORA)
         );
 
-        if (!((new ClienteModel())->existeCliente($idEmpresa, $idCliente)))
-            die("No existe el cliente para ingresar el turno");
         if (!((new SucursalesModel())->existeSucursal($idEmpresa, $idSucursal)))
             die("No existe la sucursal: $idSucursal para la empresa: $idEmpresa");
 
+        $idCliente = $cliente['idclientes'];
+
         $this->db->query("insert into turnos (idsucursales, idempresas, horario, fecha, idcliente) values
-        ($idSucursal, $idEmpresa, str_to_date($hora,'%H:%i'), str_to_date($fecha,'%d/%m/%y'), $idCliente)");
+        ('$idSucursal', '$idEmpresa', str_to_date('$hora','%H:%i'), str_to_date('$fecha','%d/%m/%y'), '$idCliente')");
     }
 
     public function getHorariosDisponibles($idEmpresa, $idSucursal, $fecha)
@@ -66,7 +66,7 @@ class TurnosModel extends Model
         );
 
         $this->db->query("select idturnos, idsucursales, idempresas, date_format(horario,'%H:%i') as horario, date_format(fecha,'%d/%m/%Y') as fecha, idcliente from turnos
-        where idsucursales = $idSucursal and idempresas = $idEmpresa and date_format(fecha,'%d/%m/%Y') = '$fecha'");
+        where idsucursales = '$idSucursal' and idempresas = '$idEmpresa' and date_format(fecha,'%d/%m/%Y') = '$fecha'");
 
         return $this->db->fetchAll();
     }

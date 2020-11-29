@@ -8,3 +8,12 @@ function parseOptionsInSelect(selectName, values) {
 
     element.append(html);
 }
+
+function showErrorValidation(msg) {
+    $(".div-error").empty();
+    $(".div-error").html("<p>-" + msg + "</p>");
+}
+
+function hideErrorValidacion() {
+    $(".div-error").hide();
+}
