@@ -27,6 +27,21 @@ if (!isset($_SESSION['logueado'])) {
 		<input type="text" name="hora_apertura" /> <br />
 		<label for="hora_cierre">Hora de cierre: </label>
 		<input type="text" name="hora_cierre" /> <br />
+		<p>Selecciones dias disponibles</p>
+		<label for="lunes">Lunes</label>
+		<input type="checkbox" name="lunes" name="lunes" value="S" /><br/>
+		<label for="martes">Martes</label>
+		<input type="checkbox" name="martes" name="martes" value="S" /><br/>
+		<label for="miercoles">Miercoles</label>
+		<input type="checkbox" name="miercoles" name="miercoles" value="S" /><br/>
+		<label for="jueves">Jueves</label>
+		<input type="checkbox" name="jueves" name="jueves" value="S" /><br/>
+		<label for="viernes">Viernes</label>
+		<input type="checkbox" name="viernes" name="viernes" value="S" /><br/>
+		<label for="sabado">Sabado</label>
+		<input type="checkbox" name="sabado" name="sabado" value="S" /><br/>
+		<label for="domingo">Domingo</label>
+		<input type="checkbox" name="domingo" name="domingo" value="S" /><br/><br/>
 		<input type="submit" value="Agregar"><br /><br />
 	</form>
 

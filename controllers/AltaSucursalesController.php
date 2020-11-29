@@ -18,8 +18,20 @@ $_SESSION['pas']=$_POST['password'];
 $v = new AltaSucursalesView();
 
 if(isset($_POST['sucursal'])) {
+
+if(!isset($_POST['lunes']))$_POST['lunes']='N';
+if(!isset($_POST['martes']))$_POST['martes']='N';
+if(!isset($_POST['miercoles']))$_POST['miercoles']='N';
+if(!isset($_POST['jueves']))$_POST['jueves']='N';
+if(!isset($_POST['viernes']))$_POST['viernes']='N';
+if(!isset($_POST['sabado']))$_POST['sabado']='N';
+if(!isset($_POST['domingo']))$_POST['domingo']='N';
+
 $s = new SucursalesModel();
 $s->agregarSucursal($_POST['sucursal'],$_POST['hora_apertura'],$_POST['hora_cierre'],$_SESSION['empresa']);
+$filaparadia = $s->getSucursalByDireccion($_SESSION['empresa'],$_POST['sucursal']);
+$sucursalparadia = $filaparadia['idsucursales'];
+$s->agregarDiasDisponibles($sucursalparadia,$_SESSION['empresa'],$_POST['lunes'],$_POST['martes'],$_POST['miercoles'],$_POST['jueves'],$_POST['viernes'],$_POST['sabado'],$_POST['domingo']);
 }
 
 $v->render();
