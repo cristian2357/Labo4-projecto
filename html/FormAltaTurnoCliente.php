@@ -38,20 +38,32 @@
 
 			<label for="fecha">Seleccione fecha disponible:</label>
 			<select name="fecha" id="fecha">			
+				<option selected disabled>Seleccione una fecha</option>
 			</select><br/><br/>
 			
 			<label for="horario">Horario de turno:</label>
 			<select name="horario" id="horario">
-				<option selected disabled>Seleccione un horario</option>
-				<option value="1">08:00</option>
-				<option value="2">10:00</option>
-				<option value="3">12:00</option>
-				<option value="4">14:00</option>
-				<option value="5">16:00</option>
-				<option value="6">18:00</option>
+				<option selected disabled>Seleccione un horario</option>				
 			</select><br/><br/>
 
-			<input type="submit" value="Agendar Turno">
+			<label for="dni">DNI cliente:</label>					
+			<input type="number" name="dni" id="dni" maxlength="8">
+			
+			<div class="datos-cliente" style="display:none">
+				<label for="nombre-cliente">Nombre y apellido:</label>
+				<input type="text" name="nombre-cliente" id="nombre-cliente" minlength="5" maxlength="70">
+				<label for="telefono-cliente">Telefono de contacto:</label>
+				<input type="number" name="telefono-cliente" id="telefono-cliente" minlength="7" maxlength="15">
+				
+				<input type="hidden" name="id-cliente">;
+			</div>	
+			
+
+			<br>
+			<button class="btn-insertar-turno">Agendar Turno</button>
+
+
+			<div class="error-validacion"></div>
 
 			<?php } else { ?>
 				<label for="empresa"><br/><br/>Seleccione empresa:</label>
@@ -67,4 +79,5 @@
 	</body>
 	<script src="js/jquery-3.5.1.min.js"></script>
 	<script src="js/AltaTurno.js"></script>
+	<script src="js/Utils.js"></script>
 </html>

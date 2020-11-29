@@ -25,4 +25,24 @@ class TestFechasUtils
         $c = date_format($b, 'd/m/y');
         var_dump($c);
     }
+
+    public static function testStrFechaHoraToDateTime()
+    {
+        $strFecha = "09/11/2020";
+        $strHora = "10:00";
+
+        var_dump(FechaHoraUtils::parseStringFechaHoraToDatetime($strFecha, $strHora));
+    }
+
+    public static function testAñadirMinutos()
+    {
+        $strFecha = "09/11/2020";
+        $strHora = "10:00";
+
+        $datetime = FechaHoraUtils::parseStringFechaHoraToDatetime($strFecha, $strHora);
+
+        FechaHoraUtils::addMinutesToDatetime($datetime, 10);
+
+        var_dump($datetime);
+    }
 }
