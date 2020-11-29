@@ -9,7 +9,7 @@ class FechaHoraUtils
         $timeStamp = strtotime("+$diasFuturos day");
         $dateTime = new DateTime();
         $dateTime->setTimestamp($timeStamp);
-        return date_format($dateTime, self::FORMAT_DEFAULT_FECHA);        
+        return date_format($dateTime, self::FORMAT_DEFAULT_FECHA);
     }
 
     public static function getNumeroDiaSemanaByDateTime($dateTime)
@@ -22,7 +22,7 @@ class FechaHoraUtils
 
     public static function parseDateTimeToStringFecha($dateTime)
     {
-        return date_format($dateTime, 'd/m/y');
+        return date_format($dateTime, self::FORMAT_DEFAULT_FECHA);
     }
 
     public static function parseStringToDateTime($strFecha)
@@ -61,5 +61,21 @@ class FechaHoraUtils
     public static function getFechaHoy()
     {
         return self::parseDateTimeToStringFecha(new DateTime());
+    }
+
+    public static function parseStringFechaHoraToDatetime($strFecha, $strHora)
+    {
+        return date_create_from_format('d/m/Y H:i', $strFecha . ' ' . $strHora);
+    }
+
+    public static function addMinutesToDatetime($datetime, $minutosAgregados)
+    {
+        $dateInterval = new DateInterval("PT" . $minutosAgregados . 'M');
+        $datetime->add($dateInterval);
+    }
+
+    public static function getHoraByDateTime($datetime)
+    {
+        return date_format($datetime, 'H:i');
     }
 }

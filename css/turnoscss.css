@@ -42,3 +42,11 @@ form {
 #ingreso {
     margin-left: 40%;
 }
+
+.error-validacion{
+    background-color: red;
+    color: white;
+    width: 700px;
+    height: 100px;
+    display: none;
+}
