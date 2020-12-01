@@ -23,7 +23,7 @@ class TurnosModel extends Model
         $turnosDiarios = $this->getTurnosDiariosBySucursal($idEmpresa, $idSucursal, $fecha);
 
         $sucursal = (new SucursalesModel())->getSucursalById($idEmpresa, $idSucursal);
-        $duracionMinutos = (new EmpresaModel())->getMinutosDuracionTurno($idEmpresa);
+        $duracionMinutos = (new EmpresaModel())->getDatosEmpresa($idEmpresa)['duracion_minuto_turno'];
         $dateTimeApertura = FechaHoraUtils::parseStringFechaHoraToDatetime($fecha, $sucursal['hora_apertura']);
         $dateTimeCierre = FechaHoraUtils::parseStringFechaHoraToDatetime($fecha, $sucursal['hora_cierre']);
 

@@ -15,15 +15,9 @@ $v = new FormAltaTurnoCliente();
 $t = new TurnosModel();
 $c = new ClienteModel();
 
-
-if (count($_POST) == 0) {
-	$v->empresas = $e->getTodos();
-	$v->render();
-}
-
-if (isset($_POST['empresa']) && !isset($_POST['puntoEntrada'])) {
+if (isset($_GET['empresa']) && !isset($_POST['puntoEntrada'])) {
 	// Datos formulario alta turno
-	$idEmpresa = $_POST['empresa'];
+	$idEmpresa = $_GET['empresa'];
 	$v->sucursales = $s->getSucursalesByEmpresa($idEmpresa);
 	$v->empresa = $e->getDatosEmpresa($idEmpresa);
 	$v->render();
