@@ -1,1 +1,58 @@
-tr,th,td{border: 2px solid black;}
+body{
+	background-image: url("../img/fondo-header-inicio-iturnos-1.jpg");
+	font-family:'Lato', sans-serif;
+}
+
+#titulo{
+	margin-left: 10px;
+	float: left;
+}
+
+#linkparaclientes{
+	text-align: right;
+	margin: 50px;
+}
+
+#buscador{
+	clear: both;
+	text-align: center;
+}
+
+#tabla{
+	text-align: center;
+}
+
+table{
+	margin: auto;
+	border: 2px solid #7f7f7f;
+}
+
+table td, table th{
+	padding: 10px;
+}
+
+#agregarsucursal{
+	margin-right: 50px;
+	text-align: right;
+}
+
+#cerrar{
+	margin-top: 20px;
+	margin-left: 47%;
+}
+
+.boton{
+	padding: 10px;
+}
+
+#altaformulariosucursal{
+	text-align: center;
+}
+
+.renglon{
+	margin-bottom: 5px;
+}
+
+label{
+	padding: 20px;
+}

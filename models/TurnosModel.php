@@ -48,7 +48,8 @@ class TurnosModel extends Model
     public function getTurnoByEmpresaSucursal($idEmpresa,$idsucursal) {
     	
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
-        date_format(fecha,'%d/%m/%y') as fecha from turnos where idempresas = '$idEmpresa' AND idsucursales = '$idsucursal' ");
+        date_format(fecha,'%d/%m/%y') as fecha from turnos where idempresas = '$idEmpresa'
+            AND idsucursales = '$idsucursal' ");
         return $this->db->fetchAll();
     }
     public function getTurnoByEmpresa($idEmpresa)

@@ -7,17 +7,15 @@ require Configuration::getAbsolutePath() . '/models/SucursalesModel.php';
 require Configuration::getAbsolutePath() . '/views/AltaSucursalesView.php';
 
 session_start();
+
 if (!isset($_SESSION['logueado'])) {
 	header("Location: LogController.php");
 	exit;
 }
-$_SESSION['empresa']=$_POST['empresa'];
-$_SESSION['usu']=$_POST['usuario'];
-$_SESSION['pas']=$_POST['password'];
 
 $v = new AltaSucursalesView();
 
-if(isset($_POST['sucursal'])) {
+if(isset($_POST['agregarsucursal'])) {
 
 if(!isset($_POST['lunes']))$_POST['lunes']='N';
 if(!isset($_POST['martes']))$_POST['martes']='N';
@@ -28,10 +26,11 @@ if(!isset($_POST['sabado']))$_POST['sabado']='N';
 if(!isset($_POST['domingo']))$_POST['domingo']='N';
 
 $s = new SucursalesModel();
-$s->agregarSucursal($_POST['sucursal'],$_POST['hora_apertura'],$_POST['hora_cierre'],$_SESSION['empresa']);
-$filaparadia = $s->getSucursalByDireccion($_SESSION['empresa'],$_POST['sucursal']);
-$sucursalparadia = $filaparadia['idsucursales'];
-$s->agregarDiasDisponibles($sucursalparadia,$_SESSION['empresa'],$_POST['lunes'],$_POST['martes'],$_POST['miercoles'],$_POST['jueves'],$_POST['viernes'],$_POST['sabado'],$_POST['domingo']);
+$s->agregarSucursal($_POST['agregarsucursal'],$_POST['hora_apertura'],$_POST['hora_cierre'],$_POST['empresa']);
+$fila = $s->getSucursalByDireccion($_POST['empresa'],$_POST['agregarsucursal']);
+$s->agregarDiasDisponibles($fila['idsucursales'], $_POST['empresa'],
+	$_POST['lunes'],$_POST['martes'],$_POST['miercoles'],$_POST['jueves'],$_POST['viernes'],
+	$_POST['sabado'],$_POST['domingo']);
 }
 
 $v->render();

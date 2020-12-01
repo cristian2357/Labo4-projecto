@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_SESSION['logueado'])) {
-	header("Location: LogController.php");
+	header("Location: ../controllers/LogController.php");
 	exit;
 }
 ?>
@@ -10,28 +10,35 @@ if (!isset($_SESSION['logueado'])) {
 
 <head>
 	<title>Lista de Turnos</title>
-	<link href="css/cssadministracion.css" rel="stylesheet" type="text/css" />
+	<link href="../css/cssadministracion.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 	
+	<div id="titulo">
 	<h1>Bienvenido <?= $this->empresa['nombre_titular'] ?></h1>
+	</div>
 
+	<div id="linkparaclientes">
+	<p>Link para clientes: <a href="turnos/?empresa=<?=$this->empresa['idempresas']?>">
+		turnos/?empresa=<?=$this->empresa['idempresas']?></a></p>
+	</div>
+
+	<div id="buscador">
 	<form action="" method="POST">
 		<input type="hidden" name="usuario" value ="<?=$_POST['usuario']?>">
 		<input type="hidden" name="password" value ="<?=$_POST['password']?>">
 		<label for="sucursal">Seleccione sucursal: </label>
 		<select name="sucursal" id="sucursal">
-			<option selected disabled>No selecciono sucursal</option>
 			<?php foreach ($this->sucursales as $s) { ?>
 				<option value="<?= $s['idsucursales'] ?>"><?= $s['direccion'] ?></option>
 			<?php } ?>
 		</select>
 		<input type="submit" value="Buscar"><br /><br />
 	</form>
-
-	<h4>Link para clientes: <a href="turnos/?empresa=<?=$this->sucursales[0]['idempresas']?>">turnos/?empresa=<?=$this->sucursales[0]['idempresas']?></a></h4>
-
+	</div>
+	
+	<div id="tabla">
 	<h1>Lista de Turnos para <?= $this->usuario['nombre_usuario'] ?></h1>
 
 	<table>
@@ -46,15 +53,20 @@ if (!isset($_SESSION['logueado'])) {
 			</tr>
 		<?php } ?>
 	</table>
-	<br />
+	</div>
+
+	<div id="agregarsucursal">
+	<h3>Desea agregar sucursales?</h3>
 	<form action="AltaSucursalesController.php" method="POST">
-		<input type="hidden" name="empresa" value ="<?=$this->sucursales[0]['idempresas']?>">
-		<input type="hidden" name="usuario" value ="<?=$_SESSION['usu']?>">
-		<input type="hidden" name="password" value ="<?=$_SESSION['pas']?>">
-		<h2>Desea agregar sucursales?</h2>
-		<input type="submit" value="Agregar sucursal"><br /><br />
+		<input type="hidden" name="empresa" value ="<?=$this->empresa['idempresas']?>">
+		<input type="hidden" name="usuario" value ="<?=$_POST['usuario']?>">
+		<input type="hidden" name="password" value ="<?=$_POST['password']?>">
+		<input class="boton" type="submit" value="Agregar sucursal">
 	</form>
-	<a href="logout.php">Cerrar sesion</a>
+	</div>
+
+	<a id="cerrar" href="logout.php">Cerrar sesion</a>
+
 </body>
 
 </html>

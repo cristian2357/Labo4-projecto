@@ -13,34 +13,32 @@ session_start();
 
 $v = new LogView();
 
-if(isset($_POST['usuario'])) {
+if(count($_POST)>0) {
 	
 	if(!isset($_POST['usuario'])) die ("campo de usuario vacio");
 	if(!isset($_POST['password'])) die ("campo de contraseña vacio");
 
 	$ml = new LogModel();
-	$hash=$ml->hash($_POST['password']);
-	$contra=$hash['hash'];
-	if($ml->existeUsuario($_POST['usuario'], $contra)) {
-		$s = new SucursalesModel();
+	if($ml->existeUsuario($_POST['usuario'], $_POST['password'])) {
 		$e = new EmpresaModel();
+		$s = new SucursalesModel();
 		$t = new TurnosModel();
 		$v = new AdministracionView();
-		$v->usuario = $ml->getUsuario($_POST['usuario'], $contra);
 		
-		$ide=$v->usuario['idempresas'];
-		$suc=$v->usuario['idsucursales'];
+		$v->usuario = $ml->getDatosByUsuario($_POST['usuario'], $_POST['password']);
+		$idemp=$v->usuario['idempresas'];
+		$idsuc=$v->usuario['idsucursales'];
 		
 		if(isset($_POST['sucursal'])) {
-		$suc=$_POST['sucursal'];
+		$idsuc=$_POST['sucursal'];
 		}
-		$v->sucursales = $s->getSucursalesByEmpresa($ide);
-		$v->turnos = $t->getTurnoByEmpresaSucursal($ide,$suc);
-		$v->empresa = $e->getDatosEmpresa($ide);
+
+		$v->empresa = $e->getDatosEmpresa($idemp);
+		$v->sucursales = $s->getSucursalesByEmpresa($idemp);
+		$v->turnos = $t->getTurnoByEmpresaSucursal($idemp,$idsuc);
 		$_SESSION['logueado'] = true;
-		$_SESSION['usu']=$_POST['usuario'];
-		$_SESSION['pas']=$_POST['password'];
 	}
 }
+
 
 $v->render();
