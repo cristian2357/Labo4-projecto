@@ -3,3 +3,5 @@
 RewriteEngine on
 
 RewriteRule ^altaTurno$ controllers/AltaTurnoController.php
+
+RewriteRule ^altaTurno-([0-9]+)$ controllers/AltaTurnoController.php?empresa=$1
