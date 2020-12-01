@@ -24,8 +24,6 @@
 			</ul>
 		</nav>
 		<form action="" method="post">
-			
-			<?php if(count($_POST)>0) { ?>
 
 			<input type="hidden" name="idEmpresa" value =<?=$this->empresa['idempresas']?>>
 			<label for="sucursal">Sucursal:</label>
@@ -53,7 +51,7 @@
 				<label for="nombre-cliente">Nombre y apellido:</label>
 				<input type="text" name="nombre-cliente" id="nombre-cliente" minlength="5" maxlength="70">
 				<label for="telefono-cliente">Telefono de contacto:</label>
-				<input type="number" name="telefono-cliente" id="telefono-cliente" minlength="7" maxlength="15">
+				<input type="text" name="telefono-cliente" id="telefono-cliente" minlength="7" maxlength="15">
 				
 				<input type="hidden" name="id-cliente">;
 			</div>	
@@ -64,16 +62,6 @@
 
 
 			<div class="error-validacion"></div>
-
-			<?php } else { ?>
-				<label for="empresa"><br/><br/>Seleccione empresa:</label>
-			<select name="empresa" id="empresa">
-				<?php foreach($this->empresas as $e) { ?>
-					<option value="<?= $e['idempresas']?>"><?= $e['nombre_empresa']?></option>
-				<?php } ?>
-			</select><br/><br/>
-			<input type="submit" value="Ver Sucursales disponibles">
-			<?php } ?>
 
 		</form>
 	</body>
