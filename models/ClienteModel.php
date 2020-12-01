@@ -23,6 +23,16 @@ class ClienteModel extends Model
         return $this->db->fetch();
     }
 
+    public function getDatosClienteById($idEmpresa, $idCliente)
+    {
+        $this->db->validar(
+            array('dni' => $idCliente, 'idEmpresa' => $idEmpresa),
+            array('dni' => TipoDato::ENTERO_POSITIVO, 'idEmpresa' => TipoDato::ENTERO_POSITIVO)
+        );
+        $this->db->query("select * from clientes where idclientes = $idCliente and idempresas = $idEmpresa");
+        return $this->db->fetch();
+    }
+
     public function insertarCliente($dniCliente, $nombre, $telefono, $idEmpresa)
     {
         $this->db->validar(
