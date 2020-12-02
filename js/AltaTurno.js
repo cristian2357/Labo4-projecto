@@ -94,6 +94,7 @@ function parseExisteCliente(response) {
 }
 
 function insertarTurnoAjax() {
+    hideErrorValidacion();
     var idSucursal = $("select[name='sucursal']").val();
     var idEmpresa = $("input[name='idEmpresa']").val();
     var fecha = $("select[name='fecha']").val();
@@ -102,7 +103,7 @@ function insertarTurnoAjax() {
     var nombreCliente = $("input[name='nombre-cliente']").val();
     var telefono = $("input[name='telefono-cliente']").val();
     var idCliente = $("input[name='id-cliente']").val();
-    if (!validarDatosFormularioAltaTurno(dniCliente, nombreCliente, telefono, true))
+    if (!validarDatosFormularioAltaTurno(dniCliente, nombreCliente, telefono, true, idSucursal, fecha, horario))
         return;
 
     $.ajax({
@@ -119,7 +120,7 @@ function insertarTurnoAjax() {
             idCliente: idCliente,
             telefono: telefono
         },
-        success: function (response) {            
+        success: function (response) {
             json = JSON.parse(response);
             if (response.includes('<')) // En errores llega codigo HTML
                 $('html').html(response);
@@ -131,28 +132,32 @@ function insertarTurnoAjax() {
 
 }
 
-function validarDatosFormularioAltaTurno(dniCliente, nombreCliente, telefono, pasoDos) {
+function validarDatosFormularioAltaTurno(dniCliente, nombreCliente, telefono, pasoDos, idSucursal, fecha, horario) {
 
-    if (!dniCliente)
+    if (!idSucursal && !existInvalidAttribute())
+        showErrorValidation("Por favor seleccione una sucursal");
+    if (!fecha && !existInvalidAttribute())
+        showErrorValidation("Por favor seleccione una fecha");
+    if (!horario && !existInvalidAttribute())
+        showErrorValidation("Por favor seleccione un horario");
+
+    if (!dniCliente && !existInvalidAttribute())
         showErrorValidation("Por favor ingrese un número de documento");
-    else if (dniCliente.lenght < 7)
+    else if (dniCliente.lenght < 7 && !existInvalidAttribute())
         showErrorValidation("El documento debe tener minimamente 7 numeros");
-    else if (dniCliente.lenght > 8)
+    else if (dniCliente.lenght > 8 && !existInvalidAttribute())
         showErrorValidation("El documento no puede tener mas de 8 numeros");
     if (!pasoDos)
         return true;
 
 
-    if (!nombreCliente)
+    if (!nombreCliente && !existInvalidAttribute())
         showErrorValidation("Por favor ingrese un nombre");
-    else if (isNaN(!nombreCliente))
+    else if (isNaN(!nombreCliente) && !existInvalidAttribute())
         showErrorValidation("El nombre no puede tener numeros");
 
-    if (!telefono)
+    if (!telefono && !existInvalidAttribute())
         showErrorValidation("Por favor ingrese un telefono");
 
-    if ($(".error-validacion").is(":visible"))
-        return false;
-
-    return true;
+    return existInvalidAttribute();
 }
