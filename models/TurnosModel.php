@@ -56,7 +56,7 @@ class TurnosModel extends Model
     public function getTurnoCompleto($idEmpresa,$idsucursal) {
         
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
-        date_format(fecha,'%d/%m/%y') as fecha, idcliente, nombre_cliente, DNI
+        date_format(fecha,'%d/%m/%y') as fecha, idcliente, nombre_cliente, telefono_cliente, DNI
         from turnos JOIN clientes
         where turnos.idcliente = clientes.idclientes and
         turnos.idempresas = '$idEmpresa'  AND turnos.idsucursales = '$idsucursal' ");

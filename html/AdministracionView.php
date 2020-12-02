@@ -17,6 +17,7 @@ if (!isset($_SESSION['logueado'])) {
 	
 	<div id="titulo">
 	<h1>Bienvenido <?= $this->empresa['nombre_titular'] ?></h1>
+	<h2>Administracion de  <?= $this->usuario['nombre_usuario'] ?></h2>
 	</div>
 
 	<div id="linkparaclientes">
@@ -41,12 +42,13 @@ if (!isset($_SESSION['logueado'])) {
 	
 	<?php if (isset($_POST['sucursal'])) { ?>
 	<div id="tabla">
-	<h1>Lista de Turnos para <?= $this->usuario['nombre_usuario'] ?></h1>
+	<h1>Lista de Turnos</h1>
 
 	<table>
 		<tr>
 			<th>DNI</th>
 			<th>Nombre de cliente</th>
+			<th>Telefono</th>
 			<th>Fecha</th>
 			<th>Horario</th>
 		</tr>
@@ -54,6 +56,7 @@ if (!isset($_SESSION['logueado'])) {
 			<tr>
 				<td><?= $t['DNI'] ?></td>
 				<td><?= $t['nombre_cliente'] ?></td>
+				<td><?= $t['telefono_cliente'] ?></td>
 				<td><?= $t['fecha'] ?></td>
 				<td><?= $t['horario'] ?></td>
 			</tr>

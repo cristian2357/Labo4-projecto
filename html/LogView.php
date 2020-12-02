@@ -10,10 +10,10 @@
 	<nav>
 		<ul>
 			<li><a href="Administrador">Log In</a></li>
-			<li><a href="">recomendar</a></li>
-			<li><a href="">contactenos</a></li>
-			<li><a href="">conozcanos</a></li>
-			<li><a href="../altaTurno">Inicio</a></li>
+			<li><a href="Recomendar">recomendar</a></li>
+			<li><a href="Contactenos">contactenos</a></li>
+			<li><a href="Conozcanos">conozcanos</a></li>
+			<li><a href="Inicio">Inicio</a></li>
 		</ul>
 	<p id="relleno"></p>
 	</nav>
