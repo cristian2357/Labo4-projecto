@@ -1,0 +1,49 @@
+body{
+    background-image: url("../img/fondo-header-inicio-iturnos-1.jpg");
+    font-family:'Lato', sans-serif;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    background: #87aa07;
+    font-size: 120%;
+    padding: 30px;
+    width: 120px;
+    float: right;
+    display: block;
+}
+
+li:hover{
+    box-shadow: 0px 3px 2px #a8a8a8;
+}
+
+a{
+    text-decoration: none;
+}
+
+#relleno{
+    height: 82px;
+    width: auto;
+    background: #87aa07;
+    margin-bottom: 100px;
+}
+
+.formulario{
+    clear: both;
+    margin-left: 40%;
+}
+
+.renglon{
+    margin-bottom: 5px;
+}
+
+.error-validacion{
+    background-color: red;
+    color: white;
+    width: 700px;
+    height: 100px;
+    display: none;
+}

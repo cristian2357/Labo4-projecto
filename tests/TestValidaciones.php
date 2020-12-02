@@ -1,9 +1,14 @@
 <?php
 
-require './fw/Database.php';
+require Configuration::getAbsolutePath().'/fw/Database.php';
 
 class TestValidaciones
 {
+    public static function mostrar($str)
+    {
+        echo "<h1> $str </h1>";
+    }
+
     public static function testValidacion()
     {
         $db = Database::getInstance();
@@ -24,7 +29,6 @@ class TestValidaciones
     public static function testValidacionAutomatica()
     {
         $db = Database::getInstance();
-        $db->query("show tables");
 
         $nombre = "Pepe";
         $apellido = "Gonzalez%%";
@@ -41,7 +45,6 @@ class TestValidaciones
     public static function testValidacionSha1()
     {
         $db = Database::getInstance();
-        $db->query("show tables");
 
         $hash = '42105214677b4e4b039e6ac9151a0db7d9d653e5';
 
@@ -53,5 +56,39 @@ class TestValidaciones
         $hash = '42105214677b4e4b039e6ac9151a0db7d9d653';
 
         $db->validar(array('hash' => $hash), array('hash' => TipoDato::SHA1));
+    }
+
+    public static function testValidacionFecha()
+    {
+        $db = Database::getInstance();
+
+        $fecha = "02/09/2020";
+        $db->validar(array('fecha' => $fecha), array('fecha' => TipoDato::FECHA));
+
+        self::mostrar("Validacion $fecha exitosa");
+
+        $fecha = "30/02/2020";
+        $db->validar(array('fecha' => $fecha), array('fecha' => TipoDato::FECHA));
+    }
+
+    public static function testValidacionFechaFormato()
+    {
+        $db = Database::getInstance();
+
+        $fecha = "02/09-2020";
+        $db->validar(array('fecha' => $fecha), array('fecha' => TipoDato::FECHA));
+    }
+
+    public static function testValidacionHora()
+    {
+        $db = Database::getInstance();
+
+        $hora = "09:00";
+
+        $db->validar(array('hora' => $hora), array('hora' => TipoDato::HORA));
+
+        $hora = "25:00";
+
+        $db->validar(array('hora' => $hora), array('hora' => TipoDato::HORA));
     }
 }
