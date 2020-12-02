@@ -1,4 +1,8 @@
 <?php
 
 require './cfg/Configuration.php';
-require Configuration::getAbsolutePath() . '/controllers/AltaTurnoController.php';
+require './tests/TestFechasUtils.php';
+
+TestFechasUtils::testListaFechasSegunDiasSemanales();
+
+

@@ -119,11 +119,13 @@ function insertarTurnoAjax() {
             idCliente: idCliente,
             telefono: telefono
         },
-        success: function (response) {
+        success: function (response) {            
+            json = JSON.parse(response);
             if (response.includes('<')) // En errores llega codigo HTML
                 $('html').html(response);
-            else
-                alert("Aca deberia llevar a la pantalla de detalle del turno");
+
+            else if (json[0] === 'OK')
+                location.replace(window.location.origin + "/" + json[2] + "/detalleTurno-" + json[1]);
         }
     });
 
