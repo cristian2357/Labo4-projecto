@@ -49,7 +49,8 @@ class TurnosModel extends Model
     }
 
     public function getTurnoByEmpresaSucursal($idEmpresa,$idsucursal) {
-    	
+        $this->db->validar(array('$idEmpresa' => $idEmpresa), array('$idEmpresa' => TipoDato::ENTERO_POSITIVO));
+        $this->db->validar(array('$idsucursal' => $idsucursal), array('$idsucursal' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
         date_format(fecha,'%d/%m/%y') as fecha from turnos where idempresas = '$idEmpresa'
             AND idsucursales = '$idsucursal' ");
@@ -57,7 +58,8 @@ class TurnosModel extends Model
     }
 
     public function getTurnoCompleto($idEmpresa,$idsucursal) {
-        
+        $this->db->validar(array('$idEmpresa' => $idEmpresa), array('$idEmpresa' => TipoDato::ENTERO_POSITIVO));
+        $this->db->validar(array('$idsucursal' => $idsucursal), array('$idsucursal' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
         date_format(fecha,'%d/%m/%y') as fecha, idcliente, nombre_cliente, telefono_cliente, DNI
         from turnos JOIN clientes
@@ -68,6 +70,7 @@ class TurnosModel extends Model
 
     public function getTurnoByEmpresa($idEmpresa)
     {
+        $this->db->validar(array('$idEmpresa' => $idEmpresa), array('$idEmpresa' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
         date_format(fecha,'%d/%m/%Y') as fecha from turnos where idempresas = '$idEmpresa' ");
         return $this->db->fetchAll();

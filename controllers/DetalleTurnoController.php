@@ -29,6 +29,9 @@ if (isset($_GET['turno']) and count($_POST) == 0) {
     $turnoModel->deleteTurno($idTurno);
 
 
-    if ($_POST['punto-entrada'] == 'E')
+    if ($_POST['punto-entrada'] == 'E'){
         header("Location: altaTurno-" . $_POST['id-empresas']);
+    }else{
+        header("Location: Inicio");
+    }
 }

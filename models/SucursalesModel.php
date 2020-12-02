@@ -44,6 +44,8 @@ class SucursalesModel extends Model
     }
 
     public function agregarDiasDisponibles($sucursal, $empresa, $lu, $ma, $mi, $ju, $vi, $sa, $do) {
+        if (!$this->existeSucursal($empresa, $sucursal))
+            die("No se ha encontrado la sucursal $sucursal para la empresa $empresa");
         $this->db->query("INSERT INTO sucursales_dias_disponibles
         (idsucursal, idempresa, atiende_lunes, atiende_martes, atiende_miercoles, atiende_jueves, atiende_viernes, atiende_sabado, atiende_domingo)
         VALUES
@@ -65,16 +67,21 @@ class SucursalesModel extends Model
         return $this->db->fetch();
     }
     public function getSucursal($idSucursal){
+        $this->db->validar(array('$idSucursal' => $idSucursal), array('$idSucursal' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("SELECT * FROM sucursales WHERE idSucursales='$idSucursal' ");
         return $this->db->fetch();
     }
 
     public function agregarSucursal($sucursal, $hora_apertura, $hora_cierre, $empresa){
+        $this->db->validar(array('$sucursal' => $sucursal), array('$sucursal' => TipoDato::ALFANUMERICO));
+        $this->db->validar(array('$empresa' => $empresa), array('$empresa' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("INSERT INTO sucursales (idempresas, direccion, hora_apertura, hora_cierre)
                             VALUES ('$empresa', '$sucursal', str_to_date('$hora_apertura','%H:%i'), str_to_date('$hora_cierre','%H:%i')) ");
     }
 
     public function getSucursalByDireccion($idempresa, $direccion) {
+        $this->db->validar(array('$idempresa' => $idempresa), array('$idempresa' => TipoDato::ENTERO_POSITIVO));
+        $this->db->validar(array('$direccion' => $direccion), array('$direccion' => TipoDato::ALFANUMERICO));
         $this->db->query("SELECT * FROM  sucursales WHERE idempresas = '$idempresa' AND direccion = '$direccion' ");
         return $this->db->fetch();
     }
