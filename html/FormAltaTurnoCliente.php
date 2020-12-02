@@ -56,7 +56,7 @@
 			<button type="button" class="btn-insertar-turno">Agendar Turno</button>
 
 
-			<div class="error-validacion"></div>
+			<div class="div-error"></div>
 
 		</form>
 	</body>

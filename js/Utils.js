@@ -12,8 +12,13 @@ function parseOptionsInSelect(selectName, values) {
 function showErrorValidation(msg) {
     $(".div-error").empty();
     $(".div-error").html("<p>-" + msg + "</p>");
+    $(".div-error").show();
 }
 
 function hideErrorValidacion() {
     $(".div-error").hide();
+}
+
+function existInvalidAttribute() {
+    return ($(".div-error").is(":visible"));
 }
