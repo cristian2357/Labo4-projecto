@@ -16,6 +16,9 @@ class TurnosModel extends Model
 
         $this->db->query("insert into turnos (idsucursales, idempresas, horario, fecha, idcliente) values
         ('$idSucursal', '$idEmpresa', str_to_date('$hora','%H:%i'), str_to_date('$fecha','%d/%m/%y'), '$idCliente')");
+
+        $this->db->query("select * from turnos where '$hora' = date_format(horario,'%H:%i') and '$fecha' = date_format(fecha,'%d/%m/%Y') and idcliente = '$idCliente' and '$idEmpresa' = idempresas ");
+        return $this->db->fetch();
     }
 
     public function getHorariosDisponibles($idEmpresa, $idSucursal, $fecha)
@@ -54,7 +57,7 @@ class TurnosModel extends Model
     public function getTurnoByEmpresa($idEmpresa)
     {
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
-        date_format(fecha,'%d/%m/%y') as fecha from turnos where idempresas = '$idEmpresa' ");
+        date_format(fecha,'%d/%m/%Y') as fecha from turnos where idempresas = '$idEmpresa' ");
         return $this->db->fetchAll();
     }
 
@@ -69,5 +72,23 @@ class TurnosModel extends Model
         where idsucursales = '$idSucursal' and idempresas = '$idEmpresa' and date_format(fecha,'%d/%m/%Y') = '$fecha'");
 
         return $this->db->fetchAll();
+    }
+
+    public function getTurnoById($idTurno)
+    {
+        $this->db->validar(array('idTurno' => $idTurno), array('idTurno' => TipoDato::ENTERO_POSITIVO));
+        $this->db->query("select idturnos, idsucursales, idempresas, date_format(horario,'%H:%i') as horario, date_format(fecha,'%d/%m/%Y') as fecha, idcliente from turnos
+        where idturnos = '$idTurno'");
+
+        if ($this->db->numRows() != 1)
+            die("El turno ingresado no existe");
+
+        return $this->db->fetch();
+    }
+
+    public function deleteTurno($idTurno)
+    {
+        $this->db->validar(array('id' => $idTurno), array('id' => TipoDato::ENTERO_POSITIVO));
+        $this->db->query("delete from turnos where idturnos = '$idTurno' limit 1");
     }
 }
