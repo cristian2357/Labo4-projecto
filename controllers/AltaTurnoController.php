@@ -63,5 +63,10 @@ if (isset($_GET['empresa']) && !isset($_POST['puntoEntrada'])) {
 
 	$cliente = $c->getDatosCliente($_POST['idEmpresa'], $_POST['dni']);
 
-	$t->insertarTurno($_POST['idEmpresa'], $_POST['idSucursal'], $_POST['hora'], $_POST['fecha'], $cliente);
+	$turno = $t->insertarTurno($_POST['idEmpresa'], $_POST['idSucursal'], $_POST['hora'], $_POST['fecha'], $cliente);
+
+	$respuesta = array("OK", $turno['idturnos'], Configuration::NOMBRE_PROYECTO);
+
+	echo json_encode($respuesta);	
 }
+?>
