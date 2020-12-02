@@ -1,5 +1,5 @@
 <?php
-
+//FORMULARIO DE SUCURSALES
 require '../cfg/Configuration.php';
 require Configuration::getAbsolutePath() . '/fw/fw.php';
 require Configuration::getAbsolutePath() . '/models/LogModel.php';
