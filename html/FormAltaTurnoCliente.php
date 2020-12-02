@@ -53,7 +53,7 @@
 			
 
 			<br>
-			<button class="btn-insertar-turno">Agendar Turno</button>
+			<button type="button" class="btn-insertar-turno">Agendar Turno</button>
 
 
 			<div class="error-validacion"></div>
