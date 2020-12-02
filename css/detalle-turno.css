@@ -1,0 +1,20 @@
+.modal-detalle-turno {
+    display: none;
+    position: fixed;
+    width: 40%;
+    height: 10%;
+    background-color: orange;
+    color: black;
+    margin-left: 30%;
+}
+
+html,
+content,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.modal-detalle-turno p{
+    text-align: center;
+}
