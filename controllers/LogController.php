@@ -14,8 +14,8 @@ session_start();
 $v = new LogView();
 
 if(count($_POST)>0) {
-	
-	if(!isset($_POST['usuario'])) die ("campo de usuario vacio");
+
+	if($_POST['usuario']=="") die ("campo de usuario vacio");
 	if(!isset($_POST['password'])) die ("campo de contraseña vacio");
 
 	$ml = new LogModel();
@@ -27,15 +27,15 @@ if(count($_POST)>0) {
 		
 		$v->usuario = $ml->getDatosByUsuario($_POST['usuario'], $_POST['password']);
 		$idemp=$v->usuario['idempresas'];
-		$idsuc=$v->usuario['idsucursales'];
 		
-		if(isset($_POST['sucursal'])) {
-		$idsuc=$_POST['sucursal'];
-		}
-
 		$v->empresa = $e->getDatosEmpresa($idemp);
 		$v->sucursales = $s->getSucursalesByEmpresa($idemp);
-		$v->turnos = $t->getTurnoByEmpresaSucursal($idemp,$idsuc);
+
+		if(isset($_POST['sucursal'])) {
+		$idsuc=$_POST['sucursal'];
+		$v->turnos = $t->getTurnoCompleto($idemp,$idsuc);
+		}
+
 		$_SESSION['logueado'] = true;
 	}
 }

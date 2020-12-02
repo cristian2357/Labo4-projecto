@@ -3,13 +3,13 @@
 
 <head>
 	<title>Inicio de sesion</title>
-	<link href="../css/turnoscss.css" rel="stylesheet" type="text/css" />
+	<link href="css/turnoscss.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 	<nav>
 		<ul>
-			<li><a href="LogController.php">Log In</a></li>
+			<li><a href="Administrador">Log In</a></li>
 			<li><a href="">recomendar</a></li>
 			<li><a href="">contactenos</a></li>
 			<li><a href="">conozcanos</a></li>

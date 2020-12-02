@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_SESSION['logueado'])) {
-	header("Location: ../controllers/LogController.php");
+	header("Location: ../Administrador");
 	exit;
 }
 ?>
@@ -10,7 +10,7 @@ if (!isset($_SESSION['logueado'])) {
 
 <head>
 	<title>Lista de Turnos</title>
-	<link href="../css/cssadministracion.css" rel="stylesheet" type="text/css" />
+	<link href="css/cssadministracion.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -20,8 +20,8 @@ if (!isset($_SESSION['logueado'])) {
 	</div>
 
 	<div id="linkparaclientes">
-	<p>Link para clientes: <a href="turnos/?empresa=<?=$this->empresa['idempresas']?>">
-		turnos/?empresa=<?=$this->empresa['idempresas']?></a></p>
+	<p>Link para clientes: <a href="altaTurno-<?=$this->empresa['idempresas']?>">
+		altaTurno-<?=$this->empresa['idempresas']?></a></p>
 	</div>
 
 	<div id="buscador">
@@ -30,6 +30,7 @@ if (!isset($_SESSION['logueado'])) {
 		<input type="hidden" name="password" value ="<?=$_POST['password']?>">
 		<label for="sucursal">Seleccione sucursal: </label>
 		<select name="sucursal" id="sucursal">
+			<option selected disabled>Buscar sucursal</option>
 			<?php foreach ($this->sucursales as $s) { ?>
 				<option value="<?= $s['idsucursales'] ?>"><?= $s['direccion'] ?></option>
 			<?php } ?>
@@ -38,26 +39,32 @@ if (!isset($_SESSION['logueado'])) {
 	</form>
 	</div>
 	
+	<?php if (isset($_POST['sucursal'])) { ?>
 	<div id="tabla">
 	<h1>Lista de Turnos para <?= $this->usuario['nombre_usuario'] ?></h1>
 
 	<table>
 		<tr>
+			<th>DNI</th>
+			<th>Nombre de cliente</th>
 			<th>Fecha</th>
 			<th>Horario</th>
 		</tr>
 		<?php foreach ($this->turnos as $t) { ?>
 			<tr>
+				<td><?= $t['DNI'] ?></td>
+				<td><?= $t['nombre_cliente'] ?></td>
 				<td><?= $t['fecha'] ?></td>
 				<td><?= $t['horario'] ?></td>
 			</tr>
 		<?php } ?>
 	</table>
 	</div>
+	<?php } ?>
 
 	<div id="agregarsucursal">
 	<h3>Desea agregar sucursales?</h3>
-	<form action="AltaSucursalesController.php" method="POST">
+	<form action="Alta-de-Sucursales" method="POST">
 		<input type="hidden" name="empresa" value ="<?=$this->empresa['idempresas']?>">
 		<input type="hidden" name="usuario" value ="<?=$_POST['usuario']?>">
 		<input type="hidden" name="password" value ="<?=$_POST['password']?>">
@@ -65,7 +72,7 @@ if (!isset($_SESSION['logueado'])) {
 	</form>
 	</div>
 
-	<a id="cerrar" href="logout.php">Cerrar sesion</a>
+	<a id="cerrar" href="Administrador">Cerrar sesion </a>
 
 </body>
 

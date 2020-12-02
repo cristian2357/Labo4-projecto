@@ -10,7 +10,7 @@
 		<h1>iTurnos</h1>
 		<nav>
 			<ul>
-				<li><a href="controllers/LogController.php">Log In</a></li>
+				<li><a href="Administrador">Log In</a></li>
 				<li><a href="">recomendar</a></li>
 				<li><a href="">contactenos</a></li>
 				<li><a href="">conozcanos</a>

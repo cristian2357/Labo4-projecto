@@ -2,6 +2,9 @@
 
 RewriteEngine on
 
+RewriteRule ^altaTurno$ controllers/AltaTurnoController.php
+RewriteRule ^Administrador$ controllers/LogController.php
+RewriteRule ^Alta-de-Sucursales$ controllers/AltaSucursalesController.php
 
 RewriteRule ^detalleTurno-([0-9]+)$ controllers/DetalleTurnoController.php?turno=$1
 

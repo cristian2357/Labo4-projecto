@@ -3,7 +3,7 @@
 
 <head>
 	<title>Alta de sucursales</title>
-	<link href="../css/cssadministracion.css" rel="stylesheet" type="text/css" />
+	<link href="css/cssadministracion.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -45,7 +45,7 @@
 		<input class="boton" type="submit" value="Agregar"><br /><br />
 	</form>
 
-	<form action="LogController.php" method="POST">
+	<form action="Administrador" method="POST">
 		<input type="hidden" name="empresa" value ="<?=$_POST['empresa']?>">
 		<input type="hidden" name="usuario" value ="<?=$_POST['usuario']?>">
 		<input type="hidden" name="password" value ="<?=$_POST['password']?>">

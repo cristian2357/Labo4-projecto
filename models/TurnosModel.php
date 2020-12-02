@@ -52,6 +52,17 @@ class TurnosModel extends Model
             AND idsucursales = '$idsucursal' ");
         return $this->db->fetchAll();
     }
+
+    public function getTurnoCompleto($idEmpresa,$idsucursal) {
+        
+        $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 
+        date_format(fecha,'%d/%m/%y') as fecha, idcliente, nombre_cliente, DNI
+        from turnos JOIN clientes
+        where turnos.idcliente = clientes.idclientes and
+        turnos.idempresas = '$idEmpresa'  AND turnos.idsucursales = '$idsucursal' ");
+        return $this->db->fetchAll();
+    }
+
     public function getTurnoByEmpresa($idEmpresa)
     {
         $this->db->query("select horario, fecha, date_format(horario,'%H:%i') as horario, 

@@ -15,8 +15,7 @@ class LogModel extends Model
         $usuarioaux = new LogModel();
     	if (!$usuarioaux->existeUsuario($user, $pass)) die ('no existe este usuario');
         $password=sha1($pass);
-        $this->db->query("SELECT * FROM user_pass join sucursales WHERE
-            user_pass.idempresas = sucursales.idempresas AND username='$user' AND password='$password' ");
+        $this->db->query("SELECT * FROM user_pass WHERE username='$user' AND password='$password' ");
         return $this->db->fetch();
     }
 }

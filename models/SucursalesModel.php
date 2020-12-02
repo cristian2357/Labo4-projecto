@@ -19,8 +19,6 @@ class SucursalesModel extends Model
             die("No existe la empresa solicitada al buscar sucursales");
 
         $this->db->query("select * from sucursales where idempresas = '$idEmpresa' ");
-        if ($this->db->numRows() < 1)
-            die("No se encontraron sucursales para la empresa '$idEmpresa' ");
             
         return $this->db->fetchAll();
     }
