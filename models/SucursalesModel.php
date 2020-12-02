@@ -18,9 +18,7 @@ class SucursalesModel extends Model
         if (!$aux->existeEmpresa($idEmpresa))
             die("No existe la empresa solicitada al buscar sucursales");
 
-        $this->db->query("select * from sucursales where idempresas = $idEmpresa");
-        if ($this->db->numRows() < 1)
-            die("No se encontraron sucursales para la empresa $idEmpresa");
+        $this->db->query("select * from sucursales where idempresas = '$idEmpresa' ");
             
         return $this->db->fetchAll();
     }
@@ -45,6 +43,14 @@ class SucursalesModel extends Model
         return $diasAtendidos;
     }
 
+    public function agregarDiasDisponibles($sucursal, $empresa, $lu, $ma, $mi, $ju, $vi, $sa, $do) {
+        $this->db->query("INSERT INTO sucursales_dias_disponibles
+        (idsucursal, idempresa, atiende_lunes, atiende_martes, atiende_miercoles, atiende_jueves, atiende_viernes, atiende_sabado, atiende_domingo)
+        VALUES
+        ('$sucursal', '$empresa', '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
+        ");
+    } 
+
     public function getSucursalById($idEmpresa, $idSucursal)
     {
         if (!$this->existeSucursal($idEmpresa, $idSucursal))
@@ -56,6 +62,20 @@ class SucursalesModel extends Model
         if ($this->db->numRows() != 1)
             die("No se han encontrado los horarios para la sucursal $idSucursal de la empresa $idEmpresa");
 
+        return $this->db->fetch();
+    }
+    public function getSucursal($idSucursal){
+        $this->db->query("SELECT * FROM sucursales WHERE idSucursales='$idSucursal' ");
+        return $this->db->fetch();
+    }
+
+    public function agregarSucursal($sucursal, $hora_apertura, $hora_cierre, $empresa){
+        $this->db->query("INSERT INTO sucursales (idempresas, direccion, hora_apertura, hora_cierre)
+                            VALUES ('$empresa', '$sucursal', str_to_date('$hora_apertura','%H:%i'), str_to_date('$hora_cierre','%H:%i')) ");
+    }
+
+    public function getSucursalByDireccion($idempresa, $direccion) {
+        $this->db->query("SELECT * FROM  sucursales WHERE idempresas = '$idempresa' AND direccion = '$direccion' ");
         return $this->db->fetch();
     }
 }

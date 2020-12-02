@@ -2,6 +2,12 @@
 
 RewriteEngine on
 
+RewriteRule ^Inicio$ controllers/InicioController.php
+RewriteRule ^Conozcanos$ controllers/ConozcanosController.php
+RewriteRule ^Contactenos$ controllers/ContactenosController.php
+RewriteRule ^Recomendar$ controllers/RecomendarController.php
+RewriteRule ^Administrador$ controllers/LogController.php
+RewriteRule ^Alta-de-Sucursales$ controllers/AltaSucursalesController.php
 
 RewriteRule ^detalleTurno-([0-9]+)$ controllers/DetalleTurnoController.php?turno=$1
 

@@ -14,20 +14,28 @@ session_start();
 $v = new LogView();
 
 if(count($_POST)>0) {
-	
-	if(!isset($_POST['usuario'])) die ("campo de usuario vacio");
+
+	if($_POST['usuario']=="") die ("campo de usuario vacio");
 	if(!isset($_POST['password'])) die ("campo de contraseña vacio");
-	//select sha1("$_POST['password']");
+
 	$ml = new LogModel();
 	if($ml->existeUsuario($_POST['usuario'], $_POST['password'])) {
+		$e = new EmpresaModel();
 		$s = new SucursalesModel();
 		$t = new TurnosModel();
 		$v = new AdministracionView();
-		$v->usuario = $ml->getUsuario($_POST['usuario'], $_POST['password']);
 		
-		$ide=$v->usuario['idempresas'];
-		$v->sucursales = $s->getSucursalesByEmpresa($ide);
-		$v->turnos = $t->getTurnoByEmpresa($ide);
+		$v->usuario = $ml->getDatosByUsuario($_POST['usuario'], $_POST['password']);
+		$idemp=$v->usuario['idempresas'];
+		
+		$v->empresa = $e->getDatosEmpresa($idemp);
+		$v->sucursales = $s->getSucursalesByEmpresa($idemp);
+
+		if(isset($_POST['sucursal'])) {
+		$idsuc=$_POST['sucursal'];
+		$v->turnos = $t->getTurnoCompleto($idemp,$idsuc);
+		}
+
 		$_SESSION['logueado'] = true;
 	}
 }

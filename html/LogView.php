@@ -3,31 +3,36 @@
 
 <head>
 	<title>Inicio de sesion</title>
-	<link href="../css/turnoscss.css" rel="stylesheet" type="text/css" />
+	<link href="css/turnoscss.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<h1>iTurnos</h1>
-		<nav>
-			<ul>
-				<li><a href="controllers/LogController.php">Log In</a></li>
-				<li><a href="">recomendar</a></li>
-				<li><a href="">contactenos</a></li>
-				<li><a href="">conozcanos</a>
-					<ul>
-						<li><a href="">Que es iTurnos?</a></li>
-						<li><a href="">Preguntas frecuentes</a></li>
-						<li><a href="">Requisitos</a></li>
-					</ul>
-				</li>
-				<li><a href="../altaTurno">Inicio</a></li>
-			</ul>
-		</nav>
-	<form id="ingreso" action="" method="post">
-		<input type="text" name="usuario" /> <br />
-		<input type="password" name="password" /> <br />
+	<nav>
+		<ul>
+			<li><a href="Administrador">Log In</a></li>
+			<li><a href="Recomendar">recomendar</a></li>
+			<li><a href="Contactenos">contactenos</a></li>
+			<li><a href="Conozcanos">conozcanos</a></li>
+			<li><a href="Inicio">Inicio</a></li>
+		</ul>
+	<p id="relleno"></p>
+	</nav>
+	
+	<form action="" method="post" class="formulario">
+	<div class="renglon">
+		<label>Usuario:</label>
+		<input type="text" name="usuario" />
+	</div>
+	<div class="renglon">
+		<label>Contraseña:</label>
+		<input type="password" name="password" />
+	</div>
+	<div class="renglon">
 		<input type="submit" value="Iniciar sesion" />
+		<?php if(count($_POST)>0) echo ("Usuario o Contraseña incorrectas"); ?>
+	</div>
 	</form>
+
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 <?php
 
 session_start();
-unset($SESSION['logueado']);
+unset($_SESSION['logueado']);
 header("Location: LogController.php");
