@@ -22,11 +22,29 @@
 		</div>
 		<div class="renglon">
 			<label for="hora_apertura">Hora de apertura: </label>
-			<input type="text" name="hora_apertura" />
+			<select name="hora_apertura" id="hora_apertura">
+			<option selected disabled>00:00</option>
+			<?php for ($i = 1; $i <= 24; $i++) { ?>
+				<?php if($i<10) { ?>
+				<option value="0<?=$i?>:00">0<?=$i?>:00</option>
+				<?php } else { ?>
+					<option value="<?=$i?>:00"><?=$i?>:00</option>
+				<?php } ?>
+			<?php } ?>
+			</select>
 		</div>
 		<div class="renglon">
 			<label for="hora_cierre">Hora de cierre: </label>
-			<input type="text" name="hora_cierre" />
+			<select name="hora_cierre" id="hora_cierre">
+			<option selected disabled>00:00</option>
+			<?php for ($i = 1; $i <= 24; $i++) { ?>
+				<?php if($i<10) { ?>
+				<option value="0<?=$i?>:00">0<?=$i?>:00</option>
+				<?php } else { ?>
+					<option value="<?=$i?>:00"><?=$i?>:00</option>
+				<?php } ?>
+			<?php } ?>
+			</select>
 		</div>
 		<p>Selecciones dias disponibles</p>
 		<div class="renglon">

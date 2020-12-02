@@ -4,7 +4,11 @@ require '../cfg/Configuration.php';
 require Configuration::getAbsolutePath() . '/fw/fw.php';
 require Configuration::getAbsolutePath() . '/models/LogModel.php';
 require Configuration::getAbsolutePath() . '/models/SucursalesModel.php';
+require Configuration::getAbsolutePath() . '/models/TurnosModel.php';
 require Configuration::getAbsolutePath() . '/views/AltaSucursalesView.php';
+require Configuration::getAbsolutePath() . '/controllers/Utils/FechaHoraUtils.php';
+
+
 
 session_start();
 
@@ -16,6 +20,14 @@ if (!isset($_SESSION['logueado'])) {
 $v = new AltaSucursalesView();
 
 if(isset($_POST['agregarsucursal'])) {
+
+$horaentrada=FechaHoraUtils::parseStringFechaHoraToDatetime(FechaHoraUtils::getFechaHoy(),$_POST['hora_apertura']);
+$horasalida=FechaHoraUtils::parseStringFechaHoraToDatetime(FechaHoraUtils::getFechaHoy(),$_POST['hora_cierre']);
+
+if($horaentrada>=$horasalida) die ("El horario de apertura es mayor o igual al horario de cierre");
+
+var_dump($horaentrada);
+var_dump($horasalida);
 
 if(!isset($_POST['lunes']))$_POST['lunes']='N';
 if(!isset($_POST['martes']))$_POST['martes']='N';
