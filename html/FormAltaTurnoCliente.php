@@ -48,7 +48,7 @@
 				<label for="telefono-cliente">Telefono de contacto:</label>
 				<input type="text" name="telefono-cliente" id="telefono-cliente" minlength="7" maxlength="15">
 				
-				<input type="hidden" name="id-cliente">;
+				<input type="hidden" name="id-cliente">
 			</div>	
 			
 
