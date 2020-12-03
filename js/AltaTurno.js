@@ -143,21 +143,26 @@ function validarDatosFormularioAltaTurno(dniCliente, nombreCliente, telefono, pa
 
     if (!dniCliente && !existInvalidAttribute())
         showErrorValidation("Por favor ingrese un número de documento");
-    else if (dniCliente.lenght < 7 && !existInvalidAttribute())
+    else if (dniCliente.length < 7 && !existInvalidAttribute())
         showErrorValidation("El documento debe tener minimamente 7 numeros");
-    else if (dniCliente.lenght > 8 && !existInvalidAttribute())
+    else if (dniCliente.length > 8 && !existInvalidAttribute())
         showErrorValidation("El documento no puede tener mas de 8 numeros");
     if (!pasoDos)
         return true;
 
+    var regex = /^[A-Za-z]+$/;
 
     if (!nombreCliente && !existInvalidAttribute())
         showErrorValidation("Por favor ingrese un nombre");
-    else if (isNaN(!nombreCliente) && !existInvalidAttribute())
+    else if (!regex.test(nombreCliente) && !existInvalidAttribute())
         showErrorValidation("El nombre no puede tener numeros");
+
+    var regexNumerico = /^[0-9]+$/;
 
     if (!telefono && !existInvalidAttribute())
         showErrorValidation("Por favor ingrese un telefono");
+    else if (!regexNumerico.test(telefono) && !existInvalidAttribute())
+        showErrorValidation("El telefono debe ser numerico");
 
-    return existInvalidAttribute();
+    return !existInvalidAttribute();
 }
