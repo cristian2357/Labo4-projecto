@@ -26,6 +26,10 @@ $horasalida=FechaHoraUtils::parseStringFechaHoraToDatetime(FechaHoraUtils::getFe
 
 if($horaentrada>=$horasalida) die ("El horario de apertura es mayor o igual al horario de cierre");
 
+if(!isset($_POST['lunes']) && !isset($_POST['martes']) && !isset($_POST['miercoles'])
+	&& !isset($_POST['jueves']) && !isset($_POST['viernes'])
+	&& !isset($_POST['sabado']) && !isset($_POST['domingo'])) die ("NO selecciono dias disponibles");
+
 if(!isset($_POST['lunes']))$_POST['lunes']='N';
 if(!isset($_POST['martes']))$_POST['martes']='N';
 if(!isset($_POST['miercoles']))$_POST['miercoles']='N';
