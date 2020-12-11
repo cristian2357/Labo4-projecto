@@ -46,6 +46,20 @@ class SucursalesModel extends Model
     public function agregarDiasDisponibles($sucursal, $empresa, $lu, $ma, $mi, $ju, $vi, $sa, $do) {
         if (!$this->existeSucursal($empresa, $sucursal))
             throw new validacionexception("No se ha encontrado la sucursal $sucursal para la empresa $empresa");
+        if (!ctype_alpha($lu)) throw new validacionexception();
+        if (strlen($lu)!=1) throw new validacionexception();
+        if (!ctype_alpha($ma)) throw new validacionexception();
+        if (strlen($ma)!=1) throw new validacionexception();
+        if (!ctype_alpha($mi)) throw new validacionexception();
+        if (strlen($mi)!=1) throw new validacionexception();
+        if (!ctype_alpha($ju)) throw new validacionexception();
+        if (strlen($ju)!=1) throw new validacionexception();
+        if (!ctype_alpha($vi)) throw new validacionexception();
+        if (strlen($vi)!=1) throw new validacionexception();
+        if (!ctype_alpha($sa)) throw new validacionexception();
+        if (strlen($sa)!=1) throw new validacionexception();
+        if (!ctype_alpha($do)) throw new validacionexception();
+        if (strlen($do)!=1) throw new validacionexception();
         
         $this->db->query("INSERT INTO sucursales_dias_disponibles
         (idsucursal, idempresa, atiende_lunes, atiende_martes, atiende_miercoles, atiende_jueves, atiende_viernes, atiende_sabado, atiende_domingo)
