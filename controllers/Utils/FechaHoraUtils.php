@@ -34,13 +34,13 @@ class FechaHoraUtils
     public static function getListaFechasEnDiasPermitidos($diasPermitidos, $fechaInicio, $fechaFin)
     {
         if (!isset($diasPermitidos) || !is_array($diasPermitidos))
-            die("Los dias ingresados como parametro no son validos");
+            throw new Exception("Los dias ingresados como parametro no son validos");
 
         $fechaInicio = Datetime::createFromFormat(SELF::FORMAT_DEFAULT_FECHA, $fechaInicio);
         $fechaFin = Datetime::createFromFormat(SELF::FORMAT_DEFAULT_FECHA, $fechaFin);
 
         if ($fechaInicio > $fechaFin)
-            die("La fecha de inicio es mayor que la final");
+            throw new Exception("La fecha de inicio es mayor que la final");
 
         $difDias = date_diff($fechaInicio, $fechaFin);
         $difDias = $difDias->format('%d');

@@ -11,7 +11,7 @@ class TipoDato
     public static function getTipoDato($dato)
     {
         if (!isset($dato))
-            die("El siguiente dato ingresado por parametro no existe o es nulo: " . $dato);
+            throw new Exception("El siguiente dato ingresado por parametro no existe o es nulo: " . $dato);
 
         $tipo = gettype($dato);
 
@@ -23,7 +23,7 @@ class TipoDato
             case "double":
                 return TipoDato::NUMERICO;
             default:
-                die("No se pudo reconocer el siguiente tipo de dato: " . $dato);
+                throw new Exception("No se pudo reconocer el siguiente tipo de dato: " . $dato);
         }
     }
 }

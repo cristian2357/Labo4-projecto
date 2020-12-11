@@ -15,10 +15,10 @@ $v = new LogView();
 
 if(count($_POST)>0) {
 
-	if($_POST['usuario']=="") die ("campo de usuario vacio");
-	if($_POST['password']=="") die ("campo de contraseña vacio");
-	if(!isset($_POST['usuario'])) die ("usuario no seteado");
-	if(!isset($_POST['password'])) die ("contraseña no seteada");
+	if($_POST['usuario']=="") throw new Exception ("campo de usuario vacio");
+	if($_POST['password']=="") throw new Exception ("campo de contraseña vacio");
+	if(!isset($_POST['usuario'])) throw new Exception ("usuario no seteado");
+	if(!isset($_POST['password'])) throw new Exception ("contraseña no seteada");
 
 	$ml = new LogModel();
 	if($ml->existeUsuario($_POST['usuario'], $_POST['password'])) {
