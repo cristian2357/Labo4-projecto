@@ -42,5 +42,3 @@ class ClienteModel extends Model
         $this->db->query("insert into clientes (nombre_cliente,telefono_cliente,idempresas,dni) values ('$nombre','$telefono','$idEmpresa','$dniCliente') ");
     }
 }
-
-class Exception extends Exception {}

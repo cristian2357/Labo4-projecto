@@ -107,4 +107,3 @@ class TurnosModel extends Model
         $this->db->query("delete from turnos where idturnos = '$idTurno' limit 1");
     }
 }
-class Exception extends Exception {}

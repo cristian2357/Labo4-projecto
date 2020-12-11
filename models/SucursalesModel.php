@@ -64,7 +64,7 @@ class SucursalesModel extends Model
         $this->db->query("INSERT INTO sucursales_dias_disponibles
         (idsucursal, idempresa, atiende_lunes, atiende_martes, atiende_miercoles, atiende_jueves, atiende_viernes, atiende_sabado, atiende_domingo)
         VALUES
-        ('$sucursal', $empresa, '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
+        ('$sucursal', '$empresa', '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
         ");
     } 
 
@@ -101,5 +101,3 @@ class SucursalesModel extends Model
         return $this->db->fetch();
     }
 }
-
-class validacionexception extends Exception {}
