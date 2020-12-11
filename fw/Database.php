@@ -19,7 +19,7 @@ class Database extends SingletonContainer
             $this->connect();
         $this->res = mysqli_query($this->cn, $query);
         if (!$this->res)
-            throw new Exception(mysqli_error($this->cn) . " " - $query);
+            throw new DefaultException(mysqli_error($this->cn) . " " - $query);
     }
 
     public function fetch()
@@ -80,7 +80,7 @@ class Database extends SingletonContainer
     private function crearArrayConTiposDeDato($datos)
     {
         if (!isset($datos) || count($datos) == 0)
-            throw new Exception("No se han recibido datos para validar");
+            throw new DefaultException("No se han recibido datos para validar");
 
         $tiposDatos = array();
         foreach ($datos as $clave => $valor)
@@ -92,36 +92,36 @@ class Database extends SingletonContainer
     private function validarInformacionParametros($datos, $tiposDatos)
     {
         if (!isset($datos) || count($datos) == 0)
-            throw new Exception("No se han recibido datos para validar");
+            throw new DefaultException("No se han recibido datos para validar");
 
         if (!isset($tiposDatos) || count($tiposDatos) == 0)
-            throw new Exception("No se han recibido tipos de datos para validar");
+            throw new DefaultException("No se han recibido tipos de datos para validar");
 
         // faltaria validacion de tipo array?
 
         if (count($datos) != count($tiposDatos))
-            throw new Exception("No coincide el tamaño de los datos a validar con los tipos de datos informados");
+            throw new DefaultException("No coincide el tamaño de los datos a validar con los tipos de datos informados");
 
         foreach ($datos as $claveDato => $valor)
             if (!isset($tiposDatos[$claveDato]))
-                throw new Exception("No existe tipo de dato para el dato: \"" . $claveDato . "\"");
+                throw new DefaultException("No existe tipo de dato para el dato: \"" . $claveDato . "\"");
 
         foreach ($tiposDatos as $claveTipo => $valor)
             if (!isset($datos[$claveTipo]))
-                throw new Exception("No existe dato para el tipo de dato \"" . $claveDato . "\"");
+                throw new DefaultException("No existe dato para el tipo de dato \"" . $claveDato . "\"");
     }
 
     private function validarEnteroPositivo($dato)
     {
         if (!ctype_digit($dato))
-            throw new Exception($dato . " no es un entero positivo");
+            throw new DefaultException($dato . " no es un entero positivo");
     }
 
 
     private function validarNumerico($dato)
     {
         if (!is_numeric($dato))
-            throw new Exception($dato . " no deberia contener caracteres alfanumericos");
+            throw new DefaultException($dato . " no deberia contener caracteres alfanumericos");
     }
 
     private function validarString($dato)
@@ -135,21 +135,21 @@ class Database extends SingletonContainer
     private function validarSha1($str)
     {
         if (!preg_match('/^[0-9a-f]{40}$/i', $str))
-            throw new Exception($str . " no es un hash valido");
+            throw new DefaultException($str . " no es un hash valido");
     }
 
     private function validarFecha($strFecha)
     {
         if (!preg_match('/' . '\d{2}(\/)\d{2}(\/)\d{4}' . '/', $strFecha))
-            throw new Exception($strFecha . " tiene un formato de fecha valido");
+            throw new DefaultException($strFecha . " tiene un formato de fecha valido");
         list($dia, $mes, $anio) = explode('/', $strFecha);
         if (!checkdate($mes, $dia, $anio))
-            throw new Exception($strFecha . " no es una fecha valida");
+            throw new DefaultException($strFecha . " no es una fecha valida");
     }
 
     private function validarHora($strHora)
     {
         if (!preg_match('/' . '(2[0-3]|[01][0-9]):[0-5][0-9]' . '/', $strHora))
-            throw new Exception("La hora ingresada es invalida");
+            throw new DefaultException("La hora ingresada es invalida");
     }
 }

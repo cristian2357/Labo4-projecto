@@ -5,7 +5,7 @@ class ClienteModel extends Model
     public function existeCliente($idEmpresa, $dniCliente)
     {
         if (!(new EmpresaModel())->existeEmpresa($idEmpresa))
-            throw new Exception("No existe la empresa ingresada para este cliente");
+            throw new DefaultException("No existe la empresa ingresada para este cliente");
 
         $this->db->validar(array('dni' => $dniCliente), array('dni' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("select * from clientes where dni = '$dniCliente' and idempresas = '$idEmpresa'");

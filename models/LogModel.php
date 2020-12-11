@@ -14,7 +14,7 @@ class LogModel extends Model
 
     public function getDatosByUsuario($user, $pass) {
         $usuarioaux = new LogModel();
-    	if (!$usuarioaux->existeUsuario($user, $pass)) throw new Exception ('no existe este usuario');
+    	if (!$usuarioaux->existeUsuario($user, $pass)) throw new DefaultException ('no existe este usuario');
         $password=sha1($pass);
         $this->db->query("SELECT * FROM user_pass WHERE username='$user' AND password='$password' ");
         return $this->db->fetch();

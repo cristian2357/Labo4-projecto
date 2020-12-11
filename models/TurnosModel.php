@@ -10,7 +10,7 @@ class TurnosModel extends Model
         );
 
         if (!((new SucursalesModel())->existeSucursal($idEmpresa, $idSucursal)))
-            throw new Exception("No existe la sucursal: $idSucursal para la empresa: $idEmpresa");
+            throw new DefaultException("No existe la sucursal: $idSucursal para la empresa: $idEmpresa");
 
         $idCliente = $cliente['idclientes'];
 
@@ -96,7 +96,7 @@ class TurnosModel extends Model
         where idturnos = '$idTurno'");
 
         if ($this->db->numRows() != 1)
-            throw new Exception("El turno ingresado no existe");
+            throw new DefaultException("El turno ingresado no existe");
 
         return $this->db->fetch();
     }
