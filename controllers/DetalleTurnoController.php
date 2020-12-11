@@ -24,7 +24,7 @@ if (isset($_GET['turno']) and count($_POST) == 0) {
 } else if (isset($_POST['punto-entrada']) && !empty($_POST['punto-entrada'])) {
     $idTurno = $_POST['id-turno'];
     if (!isset($idTurno))
-        throw new Exception("No se ha informado el id del turno");
+        die("No se ha informado el id del turno");
 
     $turnoModel->deleteTurno($idTurno);
 

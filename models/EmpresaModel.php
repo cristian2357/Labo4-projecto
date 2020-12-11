@@ -33,3 +33,5 @@ class EmpresaModel extends Model
         return $this->db->fetch();
     }    
 }
+
+class Exception extends Exception {}

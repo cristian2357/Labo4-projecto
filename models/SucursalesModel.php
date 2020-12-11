@@ -45,11 +45,12 @@ class SucursalesModel extends Model
 
     public function agregarDiasDisponibles($sucursal, $empresa, $lu, $ma, $mi, $ju, $vi, $sa, $do) {
         if (!$this->existeSucursal($empresa, $sucursal))
-            throw new Exception("No se ha encontrado la sucursal $sucursal para la empresa $empresa");
+            throw new validacionexception("No se ha encontrado la sucursal $sucursal para la empresa $empresa");
+        
         $this->db->query("INSERT INTO sucursales_dias_disponibles
         (idsucursal, idempresa, atiende_lunes, atiende_martes, atiende_miercoles, atiende_jueves, atiende_viernes, atiende_sabado, atiende_domingo)
         VALUES
-        ('$sucursal', '$empresa', '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
+        ('$sucursal', $empresa, '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
         ");
     } 
 
@@ -86,3 +87,5 @@ class SucursalesModel extends Model
         return $this->db->fetch();
     }
 }
+
+class validacionexception extends Exception {}

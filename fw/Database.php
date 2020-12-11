@@ -153,3 +153,5 @@ class Database extends SingletonContainer
             throw new Exception("La hora ingresada es invalida");
     }
 }
+
+class Exception extends Exception {}
