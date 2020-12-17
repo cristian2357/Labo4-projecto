@@ -10,7 +10,7 @@ class TurnosModel extends Model
         );
 
         if (!((new SucursalesModel())->existeSucursal($idEmpresa, $idSucursal)))
-            throw new DefaultException("No existe la sucursal: $idSucursal para la empresa: $idEmpresa");
+            throw new turnoException("No existe la sucursal: $idSucursal para la empresa: $idEmpresa");
 
         $idCliente = $cliente['idclientes'];
 
@@ -61,11 +61,12 @@ class TurnosModel extends Model
     public function getTurnoCompleto($idEmpresa,$idsucursal) {
         $this->db->validar(array('$idEmpresa' => $idEmpresa), array('$idEmpresa' => TipoDato::ENTERO_POSITIVO));
         $this->db->validar(array('$idsucursal' => $idsucursal), array('$idsucursal' => TipoDato::ENTERO_POSITIVO));
+
         $this->db->query("SELECT horario, fecha, date_format(horario,'%H:%i') as horario, 
         date_format(fecha,'%d/%m/%y') as fecha, idcliente, nombre_cliente, telefono_cliente, DNI
         from turnos JOIN clientes
         where turnos.idcliente = clientes.idclientes and
-        turnos.idempresas = $idEmpresa  AND turnos.idsucursales = $idsucursal ");
+        turnos.idempresas = $idEmpresa  AND turnos.idsucursales = $idsucursal LIMIT 10");
         return $this->db->fetchAll();
     }
 
@@ -97,7 +98,7 @@ class TurnosModel extends Model
         where idturnos = $idTurno");
 
         if ($this->db->numRows() != 1)
-            throw new DefaultException("El turno ingresado no existe");
+            throw new turnoException("El turno ingresado no existe");
 
         return $this->db->fetch();
     }
@@ -108,3 +109,5 @@ class TurnosModel extends Model
         $this->db->query("DELETE from turnos where idturnos = $idTurno limit 1");
     }
 }
+
+class turnoException extends Exception {}

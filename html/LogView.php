@@ -19,20 +19,38 @@
 	<p id="relleno"></p>
 	</nav>
 	
-	<form action="" method="post" class="formulario">
+	<form action="" method="post" class="formulario" id="formulog">
 	<div class="renglon">
 		<label>Usuario:</label>
-		<input type="text" name="usuario" />
+		<input type="text" name="usuario" id="usuario" maxlength="20" />
 	</div>
 	<div class="renglon">
 		<label>Contraseña:</label>
-		<input type="password" name="password" />
+		<input type="password" name="password" id="password" maxlength="20" />
 	</div>
 	<div class="renglon">
 		<input type="submit" value="Iniciar sesion" />
 		<?php if(count($_POST)>0) echo ("Usuario o Contraseña incorrectas"); ?>
 	</div>
 	</form>
+	<div id="caja"></div>
+
+	<script>
+		"use strict"
+		document.getElementById("formulog").onsubmit=function() {
+			var usu = document.getElementById("usuario").value;
+			var pass = document.getElementById("password").value;
+
+			if (usu.length < 2){
+				document.getElementById("caja").innerHTML = "Coloque mas de 2 letras en usuario"
+				return false;
+			}
+			if (pass.length < 2){
+				document.getElementById("caja").innerHTML = "Coloque mas de 2 letras en contraseña"
+				return false;
+			}
+		}
+	</script>
 
 </body>
 

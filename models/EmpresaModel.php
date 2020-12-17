@@ -18,7 +18,7 @@ class EmpresaModel extends Model
     public function getOperacionesByEmpresa($idEmpresa)
     {
         if (!$this->existeEmpresa($idEmpresa))
-            throw new DefaultException("No existe la empresa para la que se solicitan las operaciones");
+            throw new empresaException("No existe la empresa para la que se solicitan las operaciones");
 
         $this->db->query("SELECT * FROM operaciones where idempresas = $idEmpresa ");
         return $this->db->fetchAll();
@@ -27,9 +27,11 @@ class EmpresaModel extends Model
     public function getDatosEmpresa($idEmpresa)
     {
         if (!$this->existeEmpresa($idEmpresa))
-            throw new DefaultException("No existe la empresa solicitada");
+            throw new empresaException("No existe la empresa solicitada");
 
         $this->db->query("SELECT * FROM empresas where idempresas = $idEmpresa ");
         return $this->db->fetch();
     }    
 }
+
+class empresaException extends Exception {}

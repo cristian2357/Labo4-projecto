@@ -24,11 +24,11 @@ if(isset($_POST['agregarsucursal'])) {
 $horaentrada=FechaHoraUtils::parseStringFechaHoraToDatetime(FechaHoraUtils::getFechaHoy(),$_POST['hora_apertura']);
 $horasalida=FechaHoraUtils::parseStringFechaHoraToDatetime(FechaHoraUtils::getFechaHoy(),$_POST['hora_cierre']);
 
-if($horaentrada>=$horasalida) throw new DefaultException ("El horario de apertura es mayor o igual al horario de cierre");
+if($horaentrada>=$horasalida) throw new AltSucException ("El horario de apertura es mayor o igual al horario de cierre");
 
 if(!isset($_POST['lunes']) && !isset($_POST['martes']) && !isset($_POST['miercoles'])
 	&& !isset($_POST['jueves']) && !isset($_POST['viernes'])
-	&& !isset($_POST['sabado']) && !isset($_POST['domingo'])) throw new DefaultException ("NO selecciono dias disponibles");
+	&& !isset($_POST['sabado']) && !isset($_POST['domingo'])) throw new AltSucException ("NO selecciono dias disponibles");
 
 if(!isset($_POST['lunes']))$_POST['lunes']='N';
 if(!isset($_POST['martes']))$_POST['martes']='N';
@@ -47,3 +47,5 @@ $s->agregarDiasDisponibles($fila['idsucursales'], $_POST['empresa'],
 }
 
 $v->render();
+
+class AltSucException extends Exception {}

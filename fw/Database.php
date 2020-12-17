@@ -115,6 +115,7 @@ class Database extends SingletonContainer
     {
         if (!ctype_digit($dato))
             throw new DefaultException($dato . " no es un entero positivo");
+        if ($dato<1) throw new DefaultException($dato . " no es un entero positivo");
     }
 
 
@@ -122,10 +123,23 @@ class Database extends SingletonContainer
     {
         if (!is_numeric($dato))
             throw new DefaultException($dato . " no deberia contener caracteres alfanumericos");
+        if ($dato<1) throw new DefaultException($dato . " no es un entero positivo");
     }
 
     private function validarString($dato)
     {
+        if (strlen($dato)<1) throw new DefaultException($dato . " no es valido");
+        $dato = substr($dato, 0 , 20);
+
+        $dato = mysqli_escape_string($this->cn, $dato);
+        return $dato;
+    }
+
+    private function validarStringParaLike($dato)
+    {
+        if (strlen($dato)<1) throw new DefaultException($dato . " no es valido");
+        $dato = substr($dato, 0 , 20);
+        
         $dato = mysqli_escape_string($this->cn, $dato);
         $dato = str_replace("%", "\%", $dato);
         $dato = str_replace("_", "\_", $dato);
@@ -153,3 +167,5 @@ class Database extends SingletonContainer
             throw new DefaultException("La hora ingresada es invalida");
     }
 }
+
+class DefaultException extends Exception {}

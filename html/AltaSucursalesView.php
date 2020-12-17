@@ -18,7 +18,7 @@
 		<input type="hidden" name="password" value ="<?=$_POST['password']?>">
 		<div class="renglon">
 			<label for="agregarsucursal">Direccion: </label>
-			<input type="text" name="agregarsucursal" />
+			<input type="text" name="agregarsucursal" id="direccion" />
 		</div>
 		<div class="renglon">
 			<label for="hora_apertura">Hora de apertura: </label>
@@ -79,6 +79,19 @@
 		<input class="boton" type="submit" value="Agregar">
 		</div>
 	</form>
+	<div id="caja"></div>
+
+	<script>
+		"use strict"
+		document.getElementById("formulog").onsubmit=function() {
+			var dir = document.getElementById("direccion").value;
+
+			if (dir.length < 2){
+				document.getElementById("caja").innerHTML = "Coloque mas de 2 letras en direccion"
+				return false;
+			}
+		}
+	</script>
 
 	<form action="Administrador" method="POST">
 		<input type="hidden" name="empresa" value ="<?=$_POST['empresa']?>">

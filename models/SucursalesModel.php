@@ -16,7 +16,7 @@ class SucursalesModel extends Model
     {
         $aux = new EmpresaModel();
         if (!$aux->existeEmpresa($idEmpresa))
-            throw new DefaultException("No existe la empresa solicitada al buscar sucursales");
+            throw new validacionexception("No existe la empresa solicitada al buscar sucursales");
 
         $this->db->query("SELECT * from sucursales where idempresas = $idEmpresa ");
             
@@ -26,11 +26,11 @@ class SucursalesModel extends Model
     public function getDiasAtendidosBySucursal($idEmpresa, $idSucursal)
     {
         if (!$this->existeSucursal($idEmpresa, $idSucursal))
-            throw new DefaultException("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
+            throw new validacionexception("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
 
         $this->db->query("SELECT * from sucursales_dias_disponibles where idempresa = $idEmpresa and idsucursal = $idSucursal");
         if ($this->db->numRows() != 1)
-            throw new DefaultException("No se han encontrado los dias de atencion para la sucursal $idSucursal de la empresa $idEmpresa");
+            throw new validacionexception("No se han encontrado los dias de atencion para la sucursal $idSucursal de la empresa $idEmpresa");
 
         $diasAtendidosDb = $this->db->fetch();
         $nombreDias = array('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo');
@@ -71,13 +71,13 @@ class SucursalesModel extends Model
     public function getSucursalById($idEmpresa, $idSucursal)
     {
         if (!$this->existeSucursal($idEmpresa, $idSucursal))
-            throw new DefaultException("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
+            throw new validacionexception("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
 
         $this->db->query("SELECT direccion, date_format(hora_apertura,'%H:%i') as hora_apertura, 
         date_format(hora_cierre,'%H:%i') as hora_cierre 
         from sucursales where idempresas = $idEmpresa and idsucursales = $idSucursal");
         if ($this->db->numRows() != 1)
-            throw new DefaultException("No se han encontrado los horarios para la sucursal $idSucursal de la empresa $idEmpresa");
+            throw new validacionexception("No se han encontrado los horarios para la sucursal $idSucursal de la empresa $idEmpresa");
 
         return $this->db->fetch();
     }
@@ -101,3 +101,5 @@ class SucursalesModel extends Model
         return $this->db->fetch();
     }
 }
+
+class validacionexception extends Exception {}
