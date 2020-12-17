@@ -8,7 +8,7 @@ class ClienteModel extends Model
             throw new DefaultException("No existe la empresa ingresada para este cliente");
 
         $this->db->validar(array('dni' => $dniCliente), array('dni' => TipoDato::ENTERO_POSITIVO));
-        $this->db->query("select * from clientes where dni = '$dniCliente' and idempresas = '$idEmpresa'");
+        $this->db->query("SELECT * from clientes where dni = $dniCliente and idempresas = $idEmpresa");
 
         return $this->db->numRows() == 1;
     }
@@ -19,7 +19,7 @@ class ClienteModel extends Model
             array('dni' => $dniCliente, 'idEmpresa' => $idEmpresa),
             array('dni' => TipoDato::ENTERO_POSITIVO, 'idEmpresa' => TipoDato::ENTERO_POSITIVO)
         );
-        $this->db->query("select * from clientes where dni = $dniCliente and idempresas = $idEmpresa");
+        $this->db->query("SELECT * from clientes where dni = $dniCliente and idempresas = $idEmpresa");
         return $this->db->fetch();
     }
 
@@ -29,7 +29,7 @@ class ClienteModel extends Model
             array('dni' => $idCliente, 'idEmpresa' => $idEmpresa),
             array('dni' => TipoDato::ENTERO_POSITIVO, 'idEmpresa' => TipoDato::ENTERO_POSITIVO)
         );
-        $this->db->query("select * from clientes where idclientes = $idCliente and idempresas = $idEmpresa");
+        $this->db->query("SELECT * from clientes where idclientes = $idCliente and idempresas = $idEmpresa");
         return $this->db->fetch();
     }
 
@@ -39,6 +39,7 @@ class ClienteModel extends Model
             array('dni' => $dniCliente, 'nombre' => $nombre, 'telefono' => $telefono),
             array('dni' => TipoDato::ENTERO_POSITIVO, 'nombre' => TipoDato::ALFANUMERICO, 'telefono' => TipoDato::ENTERO_POSITIVO)
         );
-        $this->db->query("insert into clientes (nombre_cliente,telefono_cliente,idempresas,dni) values ('$nombre','$telefono','$idEmpresa','$dniCliente') ");
+        $this->db->query("INSERT into clientes (nombre_cliente,telefono_cliente,idempresas,dni)
+            values ('$nombre',$telefono,$idEmpresa,$dniCliente) ");
     }
 }

@@ -8,7 +8,7 @@ class SucursalesModel extends Model
             array('idSucursal' => $idSucursal, 'idEmpresa' => $idEmpresa),
             array('idSucursal' => TipoDato::ENTERO_POSITIVO, 'idEmpresa' => TipoDato::ENTERO_POSITIVO)
         );
-        $this->db->query("select * from sucursales where idempresas = $idEmpresa and idsucursales = $idSucursal");
+        $this->db->query("SELECT * FROM sucursales where idempresas = $idEmpresa and idsucursales = $idSucursal");
         return $this->db->numRows() == 1;
     }
 
@@ -18,7 +18,7 @@ class SucursalesModel extends Model
         if (!$aux->existeEmpresa($idEmpresa))
             throw new DefaultException("No existe la empresa solicitada al buscar sucursales");
 
-        $this->db->query("select * from sucursales where idempresas = '$idEmpresa' ");
+        $this->db->query("SELECT * from sucursales where idempresas = $idEmpresa ");
             
         return $this->db->fetchAll();
     }
@@ -28,7 +28,7 @@ class SucursalesModel extends Model
         if (!$this->existeSucursal($idEmpresa, $idSucursal))
             throw new DefaultException("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
 
-        $this->db->query("select * from sucursales_dias_disponibles where idempresa = $idEmpresa and idsucursal = $idSucursal");
+        $this->db->query("SELECT * from sucursales_dias_disponibles where idempresa = $idEmpresa and idsucursal = $idSucursal");
         if ($this->db->numRows() != 1)
             throw new DefaultException("No se han encontrado los dias de atencion para la sucursal $idSucursal de la empresa $idEmpresa");
 
@@ -64,7 +64,7 @@ class SucursalesModel extends Model
         $this->db->query("INSERT INTO sucursales_dias_disponibles
         (idsucursal, idempresa, atiende_lunes, atiende_martes, atiende_miercoles, atiende_jueves, atiende_viernes, atiende_sabado, atiende_domingo)
         VALUES
-        ('$sucursal', '$empresa', '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
+        ($sucursal, $empresa, '$lu', '$ma', '$mi', '$ju', '$vi', '$sa', '$do' )
         ");
     } 
 
@@ -73,7 +73,7 @@ class SucursalesModel extends Model
         if (!$this->existeSucursal($idEmpresa, $idSucursal))
             throw new DefaultException("No se ha encontrado la sucursal $idSucursal para la empresa $idEmpresa");
 
-        $this->db->query("select direccion, date_format(hora_apertura,'%H:%i') as hora_apertura, 
+        $this->db->query("SELECT direccion, date_format(hora_apertura,'%H:%i') as hora_apertura, 
         date_format(hora_cierre,'%H:%i') as hora_cierre 
         from sucursales where idempresas = $idEmpresa and idsucursales = $idSucursal");
         if ($this->db->numRows() != 1)
@@ -83,7 +83,7 @@ class SucursalesModel extends Model
     }
     public function getSucursal($idSucursal){
         $this->db->validar(array('$idSucursal' => $idSucursal), array('$idSucursal' => TipoDato::ENTERO_POSITIVO));
-        $this->db->query("SELECT * FROM sucursales WHERE idSucursales='$idSucursal' ");
+        $this->db->query("SELECT * FROM sucursales WHERE idSucursales=$idSucursal ");
         return $this->db->fetch();
     }
 
@@ -91,13 +91,13 @@ class SucursalesModel extends Model
         $this->db->validar(array('$sucursal' => $sucursal), array('$sucursal' => TipoDato::ALFANUMERICO));
         $this->db->validar(array('$empresa' => $empresa), array('$empresa' => TipoDato::ENTERO_POSITIVO));
         $this->db->query("INSERT INTO sucursales (idempresas, direccion, hora_apertura, hora_cierre)
-                            VALUES ('$empresa', '$sucursal', str_to_date('$hora_apertura','%H:%i'), str_to_date('$hora_cierre','%H:%i')) ");
+                            VALUES ($empresa, $sucursal, str_to_date('$hora_apertura','%H:%i'), str_to_date('$hora_cierre','%H:%i')) ");
     }
 
     public function getSucursalByDireccion($idempresa, $direccion) {
         $this->db->validar(array('$idempresa' => $idempresa), array('$idempresa' => TipoDato::ENTERO_POSITIVO));
         $this->db->validar(array('$direccion' => $direccion), array('$direccion' => TipoDato::ALFANUMERICO));
-        $this->db->query("SELECT * FROM  sucursales WHERE idempresas = '$idempresa' AND direccion = '$direccion' ");
+        $this->db->query("SELECT * FROM  sucursales WHERE idempresas = $idempresa AND direccion = '$direccion' ");
         return $this->db->fetch();
     }
 }
